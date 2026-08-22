@@ -5,3 +5,8 @@ Thumbs.db
 *~
 node_modules/
 .cache/
+fonts/helvetica/*.ttc
+fonts/helvetica/*.otf
+fonts/helvetica/*.ttf
+fonts/helvetica/.DS_Store
+~$*

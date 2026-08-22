@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingrid Rosas — Sistema de Diseño</title>
+<meta name="description" content="Página de referencia visual del sistema de diseño de la marca Ingrid Rosas: colores, tipografía, layout, profundidad, formas y componentes.">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* ============================================================
+   DESIGN TOKENS — aplicados fielmente desde DESIGN.md
+   ============================================================ */
+:root{
+  /* colors (DESIGN.md → colors) */
+  --color-primary: #0C42BC;
+  --color-secondary: #FF7900;
+  --color-tertiary: #0F0F43;
+  --color-button-orange: #F19A3B;
+  --color-surface: #FCFCFC;
+  --color-surface-bright: #FFFFFF;
+  --color-text-primary: #0F0F43;
+  --color-primary-tint: #E8EDFB;
+  --color-error: #F19A3B;
+  --color-border: #E0E0E0;
+  /* variación naranja (más oscura) para texto de error: cumple WCAG AA 4.5:1 sobre blanco */
+  --color-error-text: #B85C00;
+  /* tono atenuado: derivado de tertiary mezclado con blanco (jerarquía por color, no opacidad) */
+  --color-text-muted: color-mix(in srgb, var(--color-tertiary) 62%, var(--color-surface-bright));
+
+  /* typography (DESIGN.md → typography) */
+  --font-display: 'Beautiful Freak', 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'Google Sans Flex', 'Google Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  /* spacing (DESIGN.md → spacing) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 40px;
+  --space-4xl: 48px;
+  --space-5xl: 92px;
+  --space-6xl: 136px;
+  --max-width: 1440px;
+
+  /* rounded (DESIGN.md → rounded) */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-pill: 50px;
+  --radius-full: 50%;
+
+  /* elevation & depth (DESIGN.md → Elevation & Depth) */
+  --shadow-minimal: 0 1px 2px rgba(15, 15, 67, 0.05);
+  --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-high: 0 8px 24px rgba(0, 0, 0, 0.16);
+
+  /* degradado de marca: azul primario → naranja de acento (uso decorativo)
+     según la regla "No abuses de degradados", se aplica solo como acento puntual */
+  --grad-brand: linear-gradient(100deg, var(--color-primary), var(--color-secondary));
+}
+
+/* @font-face — Beautiful Freak Bold (fuente local) */
+@font-face{
+  font-family:'Beautiful Freak';
+  src:url('fonts/Beautiful-Freak-Bold.woff') format('woff');
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--color-surface);
+  color:var(--color-text-primary);
+  font-family:var(--font-sans);
+  font-size:20px;                 /* body-lg */
+  font-weight:400;
+  line-height:30px;               /* body-lg line-height */
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+img,svg{max-width:100%;display:block}
+a{color:var(--color-primary)}
+::selection{background:var(--color-primary);color:#fff}
+
+.skip-link{
+  position:absolute;left:-999px;top:0;z-index:100;
+  background:var(--color-primary);color:#fff;padding:12px 24px;border-radius:0 0 12px 0;
+  font-size:16px;font-weight:700;
+}
+.skip-link:focus{left:0}
+
+.container{max-width:var(--max-width);margin-inline:auto;padding-inline:var(--space-4xl)}
+section{padding-block:var(--space-5xl);scroll-margin-top:88px}
+
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);line-height:1.15}
+
+/* jerarquía por tamaño, peso y color — nunca opacidad */
+.t-display{font-family:var(--font-display);font-size:40px;font-weight:700;line-height:48px}
+.t-h1{font-family:var(--font-display);font-size:40px;font-weight:700}
+.t-h2{font-family:var(--font-display);font-size:40px;font-weight:800}
+.t-h3{font-family:var(--font-display);font-size:16px;font-weight:700}
+.t-body-lg{font-family:var(--font-sans);font-size:20px;font-weight:400;line-height:30px}
+.t-body-md{font-family:var(--font-sans);font-size:16px;font-weight:400}
+.t-label{font-family:var(--font-display);font-size:16px;font-weight:800}
+.t-button{font-family:var(--font-sans);font-size:19.216px;font-weight:400}
+.t-nav{font-family:var(--font-sans);font-size:18px;font-weight:400}
+.t-link{font-family:var(--font-sans);font-size:20px;font-weight:400}
+.t-chip{font-family:var(--font-sans);font-size:14px;font-weight:400}
+
+.muted{color:var(--color-text-muted)}
+.mono{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+
+/* Eyebrow de sección: etiqueta 16/800 con punto naranja */
+.eyebrow{
+  font-family:var(--font-display);
+  display:flex;align-items:center;gap:10px;
+  font-size:16px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--color-tertiary);
+  margin-bottom:var(--space-lg);
+}
+.eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--grad-brand);flex:none}
+
+.section-head{max-width:720px;margin-bottom:var(--space-5xl)}
+.section-head p{margin-top:var(--space-lg);color:var(--color-text-muted)}
+
+/* token tag */
+.token-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-size:14px;color:var(--color-tertiary);
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-pill);padding:4px 12px;white-space:nowrap;
+}
+.token-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--color-secondary);flex:none}
+
+/* ============================================================
+   REVEAL ON SCROLL (JS) — respeta prefers-reduced-motion
+   ============================================================ */
+.js [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.js [data-reveal].is-visible{opacity:1;transform:none}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.site-nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(252,252,252,.85);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--color-border);
+}
+.nav-inner{display:flex;align-items:center;gap:var(--space-xl);padding-block:var(--space-lg)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--color-tertiary)}
+.brand-mark{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--color-surface-bright);
+  display:grid;place-items:center;font-weight:800;font-size:16px;
+  overflow:hidden;box-shadow:var(--shadow-subtle);
+}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-name{font-family:var(--font-display);font-weight:800;font-size:16px;line-height:1.2}
+.brand-name small{display:block;font-weight:400;font-size:16px;color:var(--color-text-muted)}
+.nav-links{display:flex;align-items:center;gap:var(--space-sm);margin-left:auto;flex-wrap:wrap}
+.nav-links a{
+  color:var(--color-tertiary);font-size:18px;font-weight:400;
+  text-decoration:none;padding:8px 12px;border-radius:var(--radius-md);
+  position:relative;transition:color .15s ease;
+}
+.nav-links a:hover{color:var(--color-primary)}
+.nav-links a[aria-current="true"]{color:var(--color-primary)}
+.nav-links a[aria-current="true"]::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;
+  background:var(--color-secondary);border-radius:2px;
+}
+.nav-toggle{
+  display:none;margin-left:auto;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--color-border);background:var(--color-surface-bright);
+  color:var(--color-tertiary);cursor:pointer;place-items:center;
+}
+.nav-toggle span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;position:relative}
+.nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .2s ease}
+.nav-toggle span::before{top:-6px}
+.nav-toggle span::after{top:6px}
+.nav-toggle[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.nav-toggle[aria-expanded="true"] span{background:transparent}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;padding-block:var(--space-6xl);overflow:hidden;
+  background:linear-gradient(to top, rgba(12,66,188,.32), rgba(255,121,0,.14) 60%, transparent);color:var(--color-primary)}
+.hero .eyebrow{color:var(--color-primary)}
+.hero .eyebrow::before{background:var(--color-secondary)}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-5xl);align-items:center}
+.hero h1{margin:var(--space-lg) 0 var(--space-xl);color:var(--color-primary)}
+.hero p{max-width:560px;color:var(--color-tertiary)}
+.hero p a{color:var(--color-primary);text-decoration:underline;text-underline-offset:4px}
+.hero .btn-primary{background:var(--color-primary);color:#fff}
+.hero .btn-primary:hover{box-shadow:0 4px 12px rgba(15,15,67,.25)}
+.hero .btn-ghost{color:var(--color-primary)}
+.hero .btn-ghost:hover{color:var(--color-primary)}
+.hero .btn-ghost:hover .arrow{color:var(--color-primary)}
+.hero .btn-ghost::after{background:var(--color-primary)}
+.hero .token-tag{background:var(--color-primary-tint);border-color:var(--color-border);color:var(--color-tertiary)}
+.hero-cta{display:flex;gap:var(--space-lg);margin-top:var(--space-3xl);flex-wrap:wrap}
+.hero-visual{position:relative;min-height:420px}
+.hero-robot-wrap{position:absolute;inset:0;display:grid;place-items:center}
+.hero-robot{width:min(420px,100%);animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.blob{position:absolute;border-radius:var(--radius-full)}
+.blob-orange{width:90px;height:90px;background:rgba(255,121,0,.18);top:6%;left:4%}
+.blob-blue{width:56px;height:56px;background:rgba(12,66,188,.16);bottom:12%;right:6%;border-radius:var(--radius-xl)}
+.blob-tint{width:34px;height:34px;background:rgba(15,15,67,.12);top:18%;right:22%;border-radius:var(--radius-md)}
+.hero-tag{position:absolute;left:-6px;bottom:10%;max-width:240px}
+.hero-meta{
+  position:absolute;top:0;right:0;
+  display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-sm);
+}
+
+/* ============================================================
+   OVERVIEW
+   ============================================================ */
+.overview-card{
+  background:var(--color-surface-bright);border-radius:var(--radius-xl);
+  padding:var(--space-3xl) var(--space-4xl);
+  box-shadow:var(--shadow-minimal);position:relative;overflow:hidden;
+}
+.overview-card::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--color-secondary);
+}
+.overview-card p{max-width:820px}
+.principios{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-xl);margin-top:var(--space-4xl)}
+.principio h3{display:flex;align-items:center;gap:10px;margin-bottom:var(--space-md)}
+.principio h3 .num{
+  width:34px;height:34px;border-radius:var(--radius-full);flex:none;
+  background:var(--color-primary-tint);color:var(--color-primary);
+  display:grid;place-items:center;font-weight:800;font-size:16px;
+}
+.principio p{color:var(--color-text-muted);font-size:16px;line-height:24px}
+
+/* ============================================================
+   COLORS
+   ============================================================ */
+.color-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-xl)}
+.color-card{
+  background:var(--color-surface-bright);border-radius:var(--radius-xl);
+  overflow:hidden;box-shadow:var(--shadow-minimal);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.color-card:hover{box-shadow:var(--shadow-subtle);transform:scale(1.01)}
+.swatch{height:140px;display:flex;flex-direction:column;justify-content:space-between;padding:var(--space-lg);border-bottom:1px solid var(--color-border)}
+.swatch .sw-hex{font-size:16px;font-weight:700;font-family:ui-monospace,Menlo,Consolas,monospace}
+.copy-btn{
+  align-self:flex-start;border:0;cursor:pointer;border-radius:var(--radius-pill);
+  font-size:14px;padding:6px 12px;background:rgba(255,255,255,.18);
+  color:inherit;transition:transform .15s ease;
+}
+.copy-btn:hover{transform:translateY(-1px)}
+.copy-btn.copied{background:var(--color-secondary);color:var(--color-tertiary)}
+.color-info{padding:var(--space-lg)}
+.color-info h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.color-info p{font-size:16px;line-height:22px;color:var(--color-text-muted);margin-bottom:var(--space-md)}
+.contrast-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:14px;font-weight:700;color:var(--color-tertiary);
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-pill);padding:3px 10px;
+}
+.contrast-badge .ok{color:var(--color-primary)}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.type-intro{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);margin-bottom:var(--space-4xl)}
+.type-intro .tip{display:flex;gap:var(--space-lg);align-items:flex-start}
+.type-intro .tip .face{
+  width:52px;height:52px;border-radius:var(--radius-full);flex:none;
+  display:grid;place-items:center;color:#fff;
+}
+.type-intro .tip.face-bf .face{background:var(--color-primary)}
+.type-intro .tip.face-gsf .face{background:var(--color-secondary);color:var(--color-tertiary)}
+.type-intro .tip h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.type-intro .tip p{font-size:16px;line-height:24px;color:var(--color-text-muted)}
+.type-sample{
+  display:grid;grid-template-columns:1fr auto;gap:var(--space-xl);align-items:center;
+  background:var(--color-surface-bright);border-radius:var(--radius-xl);
+  padding:var(--space-2xl) var(--space-3xl);margin-bottom:var(--space-md);
+  box-shadow:var(--shadow-minimal);position:relative;
+}
+.type-sample .spec{
+  text-align:right;font-size:16px;line-height:22px;color:var(--color-text-muted);white-space:nowrap;
+}
+.type-sample .spec b{display:block;color:var(--color-tertiary);font-weight:800}
+.type-note{
+  margin-top:var(--space-2xl);background:var(--color-primary-tint);
+  border-radius:var(--radius-lg);padding:var(--space-lg) var(--space-xl);
+  font-size:16px;line-height:24px;color:var(--color-tertiary);
+}
+
+/* ============================================================
+   LAYOUT & SPACING
+   ============================================================ */
+.layout-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5xl);align-items:start}
+.spacing-item{display:grid;grid-template-columns:56px 1fr;gap:var(--space-lg);align-items:center;margin-bottom:var(--space-md)}
+.spacing-item .val{font-size:16px;font-weight:800;color:var(--color-tertiary)}
+.spacing-item .bar{height:32px;border-radius:var(--radius-md);background:var(--color-primary);min-width:8px}
+.spacing-item .bar.tint{background:var(--color-secondary)}
+.spacing-item .bar.grad{background:var(--grad-brand)}
+.spacing-item .name{font-size:16px;color:var(--color-text-muted)}
+.grid-demo{margin-top:var(--space-2xl)}
+.grid-demo h3{font-size:16px;font-weight:800;margin-bottom:var(--space-md);display:flex;align-items:center;gap:8px}
+.grid-demo h3 .cols{font-weight:400;color:var(--color-text-muted)}
+.grid-row{display:grid;gap:8px;margin-bottom:var(--space-lg)}
+.grid-row div{background:var(--color-primary-tint);border-radius:var(--radius-md);height:28px;border:1px solid rgba(12,66,188,.25)}
+.grid-row .lead{background:var(--grad-brand)}
+.layout-note{
+  margin-top:var(--space-2xl);font-size:16px;line-height:24px;color:var(--color-text-muted);
+  border-left:3px solid var(--color-secondary);padding-left:var(--space-lg);
+}
+
+/* ============================================================
+   ELEVATION & DEPTH
+   ============================================================ */
+.elev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-xl)}
+.elev-card{
+  background:var(--color-surface-bright);border-radius:var(--radius-xl);
+  padding:var(--space-2xl);min-height:200px;display:flex;flex-direction:column;gap:var(--space-md);
+  border:1px solid var(--color-border);
+}
+.elev-card .elev-label{font-size:16px;font-weight:800}
+.elev-card .elev-spec{font-size:16px;color:var(--color-text-muted);line-height:22px;margin-top:auto}
+.scrim-demo{
+  margin-top:var(--space-4xl);border-radius:var(--radius-xl);overflow:hidden;
+  position:relative;min-height:260px;border:1px solid var(--color-border);
+}
+.scrim-bg{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);padding:var(--space-xl)}
+.scrim-bg .b{background:var(--color-surface-bright);border-radius:var(--radius-lg);box-shadow:var(--shadow-minimal)}
+.scrim-bg .b .ln{height:10px;border-radius:4px;background:var(--color-border);margin:var(--space-md) 0 0 var(--space-md)}
+.scrim-bg .b .ln.l2{width:60%}
+.scrim-bg .b .ln.l3{width:40%}
+.scrim-veil{
+  position:absolute;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);
+  display:grid;place-items:center;
+}
+.scrim-modal{
+  width:min(360px,82%);background:#fff;border-radius:var(--radius-xl);
+  padding:var(--space-2xl) var(--space-3xl);box-shadow:var(--shadow-high);
+}
+.scrim-modal h3{font-size:16px;font-weight:800;margin-bottom:var(--space-sm)}
+.scrim-modal p{font-size:16px;line-height:24px;color:var(--color-text-muted);margin-bottom:var(--space-xl)}
+.scrim-modal .row{display:flex;gap:var(--space-md)}
+
+/* ============================================================
+   SHAPES
+   ============================================================ */
+.shapes-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--space-xl)}
+.shape-card{
+  background:var(--color-surface-bright);border-radius:var(--radius-xl);
+  padding:var(--space-xl);text-align:center;box-shadow:var(--shadow-minimal);
+  display:flex;flex-direction:column;align-items:center;gap:var(--space-lg);
+}
+.shape-box{width:96px;height:96px;background:var(--color-primary);margin-inline:auto}
+.shape-circle{width:96px;height:96px;background:var(--color-secondary);border-radius:50%}
+.shape-pill{width:140px;height:48px;background:var(--color-primary);border-radius:50px}
+.shape-card .s-label{font-size:16px;font-weight:800}
+.shape-card .s-spec{font-size:14px;color:var(--color-text-muted)}
+.robot-row{
+  margin-top:var(--space-4xl);background:var(--color-surface-bright);
+  border-radius:var(--radius-xl);padding:var(--space-3xl) var(--space-4xl);
+  box-shadow:var(--shadow-minimal);display:grid;grid-template-columns:1fr auto;gap:var(--space-4xl);align-items:center;
+}
+.robot-row img{width:min(220px,100%)}
+.robot-row h3{font-size:16px;font-weight:800;margin-bottom:var(--space-sm)}
+.robot-row p{font-size:16px;line-height:24px;color:var(--color-text-muted)}
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+.comp-block{margin-bottom:var(--space-6xl)}
+.comp-block:last-child{margin-bottom:0}
+.comp-block > h3{
+  display:flex;align-items:center;gap:12px;font-size:40px;font-weight:800;margin-bottom:var(--space-xl);
+}
+.comp-block > h3 .idx{
+  font-size:16px;font-weight:800;color:var(--color-primary);background:var(--color-primary-tint);
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:none;
+}
+.comp-stage{
+  background:var(--color-surface-bright);border-radius:var(--radius-xl);
+  padding:var(--space-3xl) var(--space-4xl);box-shadow:var(--shadow-minimal);
+  display:flex;flex-wrap:wrap;gap:var(--space-xl);align-items:center;
+}
+.comp-stage.column{flex-direction:column;align-items:stretch}
+.comp-stage .hint{width:100%;font-size:16px;color:var(--color-text-muted);margin-bottom:var(--space-md)}
+
+/* Botones */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-sans);font-size:19.216px;font-weight:400;line-height:1;
+  padding:12px 24px;border-radius:50px;border:0;cursor:pointer;text-decoration:none;
+  transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease,color .15s ease;
+}
+.btn:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}
+.btn-primary{background:var(--color-primary);color:#fff}
+.btn-primary:hover{box-shadow:var(--shadow-medium);transform:translateY(-1px) scale(1.01)}
+.btn-primary:active{transform:scale(0.99);box-shadow:none}
+.btn-secondary{background:var(--color-button-orange);color:var(--color-tertiary)}
+.btn-secondary:hover{box-shadow:var(--shadow-medium);transform:translateY(-1px) scale(1.01)}
+.btn-secondary:active{transform:scale(0.99);box-shadow:none}
+.btn-ghost{background:transparent;color:var(--color-tertiary);position:relative}
+.btn-ghost:hover{color:var(--color-secondary)}
+.btn-ghost .arrow{transition:transform .15s ease,color .15s ease}
+.btn-ghost:hover .arrow{transform:translateX(4px);color:var(--color-secondary)}
+.btn-ghost::after{
+  content:"";position:absolute;left:24px;right:24px;bottom:6px;height:2px;border-radius:2px;
+  background:var(--grad-brand);transform:scaleX(0);transform-origin:left;transition:transform .2s ease;
+}
+.btn-ghost:hover::after{transform:scaleX(1)}
+.btn-icon{
+  width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  border:0;cursor:pointer;background:var(--color-primary);color:#fff;
+  transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease,color .15s ease;
+}
+.btn-icon:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}
+.btn-icon.light{background:var(--color-surface);color:var(--color-tertiary);border:1px solid var(--color-border)}
+.btn-icon.light:hover{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+.btn-icon:hover{box-shadow:var(--shadow-subtle);transform:translateY(-2px)}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--space-lg);align-items:center}
+
+/* Tarjetas */
+.card{
+  background:var(--color-surface-bright);border-radius:var(--radius-xl);
+  padding:var(--space-xl) var(--space-2xl);box-shadow:var(--shadow-minimal);
+  border:1px solid var(--color-border);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.card:hover{box-shadow:var(--shadow-subtle);transform:scale(1.01)}
+.card h4{font-size:16px;font-weight:800;margin-bottom:var(--space-sm)}
+.card p{font-size:16px;line-height:24px;color:var(--color-text-muted);margin-bottom:var(--space-lg)}
+.card-accent{position:relative;overflow:hidden}
+.card-accent::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--grad-brand)}
+.card-stack{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-xl);width:100%}
+.card-featured{box-shadow:var(--shadow-medium);border-color:transparent;position:relative;overflow:hidden}
+.card-featured::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-brand)}
+.card-featured:hover{box-shadow:var(--shadow-medium)}
+
+/* Campos y formularios */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl);width:100%}
+.field-group{display:flex;flex-direction:column;gap:var(--space-sm)}
+.field-label{font-family:var(--font-sans);font-size:16px;font-weight:800;color:var(--color-tertiary)}
+.field{
+  font-family:var(--font-sans);font-size:18px;font-weight:400;color:var(--color-tertiary);
+  background:#fff;border:1px solid var(--color-border);border-radius:8px;
+  padding:12px 16px;width:100%;transition:border-color .15s ease,box-shadow .15s ease;
+}
+.field::placeholder{color:var(--color-text-muted)}
+.field:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 4px var(--color-primary-tint)}
+.field.has-error{border-color:var(--color-error)}
+.field.has-error:focus{box-shadow:0 0 0 4px color-mix(in srgb, var(--color-error) 22%, transparent)}
+.error-msg{
+  display:flex;align-items:center;gap:8px;font-size:16px;color:var(--color-error-text);
+}
+.error-msg svg{flex:none}
+
+/* Chips */
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-sans);font-size:14px;font-weight:400;color:var(--color-tertiary);
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:50px;padding:8px 16px;
+}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--color-secondary);flex:none}
+.chip-tint{background:var(--color-primary-tint);border-color:transparent}
+
+/* Avatar */
+.avatar-wrap{position:relative;width:200px;height:200px;flex:none}
+.avatar-wrap > img{width:100%;height:100%;object-fit:contain}
+.comp-block#bloque-avatar .comp-stage{gap:var(--space-5xl);padding:var(--space-4xl) var(--space-5xl)}
+.avatar-layer{position:absolute;inset:0;background:var(--grad-brand);border-radius:50%;transform:translate(10px,10px)}
+.avatar-img{
+  position:absolute;inset:0;border-radius:50%;overflow:hidden;background:var(--color-primary-tint);
+  border:3px solid #fff;box-shadow:var(--shadow-subtle);
+}
+.avatar-img img{width:100%;height:100%;object-fit:contain}
+.avatar-wrap.rounded .avatar-layer{border-radius:24px;transform:translate(8px,10px)}
+.avatar-wrap.rounded .avatar-img{border-radius:24px}
+.avatar-caption{margin-top:var(--space-md);font-size:16px;color:var(--color-text-muted);max-width:220px}
+
+/* Íconos sociales */
+.social-row{display:flex;gap:var(--space-lg);align-items:center}
+.social{
+  width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--color-surface);color:var(--color-tertiary);border:1px solid var(--color-border);
+  transition:background-color .15s ease,color .15s ease,transform .15s ease,box-shadow .15s ease;
+}
+.social:hover{background:var(--color-primary);color:#fff;border-color:var(--color-primary);transform:translateY(-2px);box-shadow:var(--shadow-subtle)}
+.social svg{width:18px;height:18px}
+.social.acc::after{
+  content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:var(--color-secondary);
+  transform:translate(16px,-14px);
+}
+
+/* Proyecto */
+.project{
+  width:min(460px,100%);background:#fff;border-radius:var(--radius-xl);overflow:hidden;
+  box-shadow:var(--shadow-minimal);border:1px solid var(--color-border);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.project:hover{box-shadow:var(--shadow-medium);transform:scale(1.01)}
+.project .p-img{position:relative;aspect-ratio:16/9;background:var(--color-primary-tint);overflow:hidden}
+.project .p-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.project:hover .p-img img{transform:scale(1.05)}
+.project .p-img::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:55%;
+  background:linear-gradient(to top, rgba(12,66,188,.32), rgba(255,121,0,.14) 60%, transparent);
+}
+.project .p-body{padding:var(--space-xl) var(--space-2xl)}
+.project .p-body h4{font-size:16px;font-weight:800;margin-bottom:var(--space-sm)}
+.project .p-body p{font-size:16px;line-height:24px;color:var(--color-text-muted);margin-bottom:var(--space-lg)}
+.project .p-foot{display:flex;justify-content:space-between;align-items:center}
+.project .p-arrow{color:var(--color-secondary);display:inline-flex;transition:transform .2s ease}
+.project:hover .p-arrow{transform:translateX(6px)}
+
+/* Educación y experiencia */
+.timeline{position:relative;padding-left:var(--space-3xl);width:100%}
+.timeline::before{content:"";position:absolute;left:0;top:var(--space-lg);bottom:var(--space-lg);width:3px;border-radius:2px;background:var(--grad-brand)}
+.timeline-item{position:relative;padding-bottom:var(--space-2xl)}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-item::before{
+  content:"";position:absolute;left:-5px;top:8px;
+  width:13px;height:13px;border-radius:50%;background:var(--grad-brand);
+  border:3px solid #fff;box-shadow:var(--shadow-subtle);
+}
+.timeline-item .date{font-size:16px;font-weight:800;color:var(--color-secondary);margin-bottom:4px}
+.timeline-item h4{font-size:16px;font-weight:800;margin-bottom:4px}
+.timeline-item p{font-size:16px;line-height:24px;color:var(--color-text-muted);max-width:560px}
+
+/* Hero mini (muestra del componente) */
+.hero-mini{
+  width:100%;background:var(--color-surface);border-radius:var(--radius-xl);
+  padding:var(--space-3xl) var(--space-4xl);position:relative;overflow:hidden;
+  border:1px solid var(--color-border);
+  display:grid;grid-template-columns:1fr auto;gap:var(--space-3xl);align-items:center;
+}
+.hero-mini .mini-eyebrow{font-family:var(--font-display);font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--color-primary);display:flex;align-items:center;gap:8px}
+.hero-mini .mini-eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--color-secondary)}
+.hero-mini h4{font-family:var(--font-display);font-size:40px;line-height:48px;font-weight:700;margin:var(--space-md) 0}
+.hero-mini h4 em{font-style:normal;color:var(--color-primary)}
+.hero-mini p{font-size:16px;line-height:24px;color:var(--color-text-muted);max-width:420px;margin-bottom:var(--space-xl)}
+.hero-mini img{width:min(220px,100%);animation:float 7s ease-in-out infinite}
+
+/* ============================================================
+   DO'S AND DON'TS
+   ============================================================ */
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4xl)}
+.rules-card{background:var(--color-surface-bright);border-radius:var(--radius-xl);padding:var(--space-3xl) var(--space-4xl);box-shadow:var(--shadow-minimal)}
+.rules-card h3{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-2xl)}
+.rules-card h3 .badge{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:16px}
+.rules-card.do h3 .badge{background:var(--color-primary)}
+.rules-card.dont h3 .badge{background:var(--color-secondary);color:var(--color-tertiary)}
+.rules-card ul{list-style:none}
+.rules-card li{display:flex;gap:12px;padding-block:var(--space-md);font-size:16px;line-height:24px;border-top:1px solid var(--color-border)}
+.rules-card li:last-child{border-bottom:1px solid var(--color-border)}
+.rules-card li svg{flex:none;margin-top:4px}
+.rules-card li.rule-do svg{color:var(--color-primary)}
+.rules-card li.rule-dont svg{color:var(--color-secondary)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  border-top:1px solid var(--color-border);padding-block:var(--space-4xl);
+  background:var(--color-surface-bright);
+}
+.footer-grad{height:4px;background:var(--grad-brand);border:0}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;gap:var(--space-xl);flex-wrap:wrap}
+.foot-inner p{font-size:16px;color:var(--color-text-muted)}
+.foot-inner .brand{flex:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1100px){
+  .color-grid{grid-template-columns:repeat(3,1fr)}
+  .elev-grid{grid-template-columns:repeat(2,1fr)}
+  .shapes-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:900px){
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;background:var(--color-surface-bright);
+    flex-direction:column;align-items:stretch;padding:var(--space-lg);gap:var(--space-sm);
+    border-bottom:1px solid var(--color-border);box-shadow:var(--shadow-medium);
+    display:none;
+  }
+  .nav-links.open{display:flex}
+  .nav-toggle{display:grid}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{min-height:320px;order:-1}
+  .layout-grid,.type-intro,.form-grid,.rules-grid{grid-template-columns:1fr}
+  .principios{grid-template-columns:1fr}
+  .card-stack{grid-template-columns:1fr}
+  .robot-row{grid-template-columns:1fr}
+  .hero-mini{grid-template-columns:1fr}
+  .hero-mini img{margin-inline:auto}
+  .type-sample{grid-template-columns:1fr}
+  .type-sample .spec{text-align:left}
+  .container{padding-inline:var(--space-lg)}
+  section{padding-block:var(--space-4xl)}
+  .section-head{margin-bottom:var(--space-3xl)}
+}
+@media (max-width:560px){
+  .color-grid{grid-template-columns:repeat(2,1fr)}
+  .elev-grid{grid-template-columns:1fr}
+  .shapes-grid{grid-template-columns:repeat(2,1fr)}
+  body{font-size:20px}
+  .t-display,.t-h1,.t-h2{font-size:40px}
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .hero-robot,.hero-mini img{animation:none !important}
+  .js [data-reveal]{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<!-- ============ NAVEGACIÓN ============ -->
+<header class="site-nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="Ir al inicio">
+      <span class="brand-mark" aria-hidden="true"><img src="assets/IRv3.svg" alt=""></span>
+      <span class="brand-name">Ingrid Rosas<small>Sistema de Diseño</small></span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Abrir menú">
+      <span aria-hidden="true"></span>
+    </button>
+    <nav class="nav-links" id="nav-list" aria-label="Navegación principal">
+      <a href="#overview">Resumen</a>
+      <a href="#colors">Colores</a>
+      <a href="#typography">Tipografía</a>
+      <a href="#layout">Layout</a>
+      <a href="#elevation">Profundidad</a>
+      <a href="#shapes">Formas</a>
+      <a href="#components">Componentes</a>
+      <a href="#rules">Reglas</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Portfolio · Diseño gráfico digital</p>
+        <h1 class="t-display" id="hero-title">Un sistema de diseño vivo, claro y con imaginación.</h1>
+        <p class="t-body-lg">Colores, tipografía, layout, profundidad, formas y componentes: esta página es la referencia visual de mi sistema de diseño, aplicado fielmente desde <a href="DESIGN.md">DESIGN.md</a>.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#components">Ver componentes</a>
+          <a class="btn btn-ghost" href="#colors">Explorar el sistema
+            <span class="arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <span class="blob blob-orange"></span>
+        <span class="blob blob-tint"></span>
+        <span class="blob blob-blue"></span>
+        <div class="hero-robot-wrap" id="hero-robot-wrap">
+          <img class="hero-robot" id="hero-robot" src="assets/Ingrid_Rosas1.svg" alt="">
+        </div>
+        <div class="hero-meta">
+          <span class="token-tag">colors.primary · #0C42BC</span>
+          <span class="token-tag">colors.secondary · #FF7900</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="overview" aria-labelledby="overview-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Resumen</p>
+        <h2 class="t-h2" id="overview-title">Una estética moderna, dinámica y creativa</h2>
+      </div>
+      <div class="overview-card" data-reveal>
+        <p class="t-body-lg">La marca tiende un puente entre la experimentación y la calidad del trabajo. Se apoya en naranja vibrante y azul profundo, y transmite confianza, creatividad e imaginación. Prioriza la claridad y la legibilidad con una filosofía minimalista: layouts limpios, espacio en blanco y tipografía con propósito. En una frase: <strong>un acento de imaginación y experimentación, pero sin caer en lo alocado y sin propósito.</strong></p>
+      </div>
+      <div class="principios">
+        <article class="principio" data-reveal>
+          <h3 class="t-h3"><span class="num" aria-hidden="true">1</span>Claridad</h3>
+          <p>Layouts limpios, espacio en blanco generoso y una jerarquía clara respetan el tiempo y la carga cognitiva del usuario.</p>
+        </article>
+        <article class="principio" data-reveal>
+          <h3 class="t-h3"><span class="num" aria-hidden="true">2</span>Profundidad</h3>
+          <p>La página se percibe como planos digitales que se acercan, se alejan y reaccionan a la navegación: capas, sombras suaves y movimiento con intención.</p>
+        </article>
+        <article class="principio" data-reveal>
+          <h3 class="t-h3"><span class="num" aria-hidden="true">3</span>Imaginación</h3>
+          <p>El robot y las formas geométricas son recursos narrativos recurrentes que rompen la cuadrícula de forma controlada, sin perder legibilidad.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLORS ============ -->
+  <section id="colors" aria-labelledby="colors-title" style="background:var(--color-surface-bright)">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Colores</p>
+        <h2 class="t-h2" id="colors-title">Una paleta de alto contraste</h2>
+        <p>Azul y naranja de marca sobre una base de neutros. Nunca con la misma intensidad en un mismo elemento: uno domina y el otro actúa como acento.</p>
+      </div>
+      <div class="color-grid">
+
+        <article class="color-card" data-reveal>
+          <div class="swatch" style="background:var(--color-primary);color:#fff">
+            <span class="token-tag" style="background:rgba(255,255,255,.14);border-color:transparent;color:#fff">colors.primary</span>
+            <button class="copy-btn" type="button" data-copy="#0C42BC">Copiar</button>
+            <span class="sw-hex">#0C42BC</span>
+          </div>
+          <div class="color-info">
+            <h3>Azul de marca</h3>
+            <p>Botones de acción (CTA), acentos, títulos e identidad.</p>
+            <span class="contrast-badge"><span class="ok" aria-hidden="true">✓</span> Blanco / Azul · 8.3:1</span>
+          </div>
+        </article>
+
+        <article class="color-card" data-reveal>
+          <div class="swatch" style="background:var(--color-secondary);color:var(--color-tertiary)">
+            <span class="token-tag" style="background:rgba(15,15,67,.08);border-color:transparent">colors.secondary</span>
+            <button class="copy-btn" type="button" data-copy="#FF7900">Copiar</button>
+            <span class="sw-hex">#FF7900</span>
+          </div>
+          <div class="color-info">
+            <h3>Naranja de acento</h3>
+            <p>Da acentos a la página: detalles, líneas y puntos de identidad.</p>
+            <span class="contrast-badge"><span class="ok" aria-hidden="true">✓</span> Oscuro / Naranja · 6.8:1</span>
+          </div>
+        </article>
+
+        <article class="color-card" data-reveal>
+          <div class="swatch" style="background:var(--color-tertiary);color:#fff">
+            <span class="token-tag" style="background:rgba(255,255,255,.14);border-color:transparent;color:#fff">colors.tertiary</span>
+            <button class="copy-btn" type="button" data-copy="#0F0F43">Copiar</button>
+            <span class="sw-hex">#0F0F43</span>
+          </div>
+          <div class="color-info">
+            <h3>Azul oscuro</h3>
+            <p>Enlaces, interactivos secundarios y texto de la interfaz.</p>
+            <span class="contrast-badge"><span class="ok" aria-hidden="true">✓</span> Blanco / Azul oscuro · 17.9:1</span>
+          </div>
+        </article>
+
+        <article class="color-card" data-reveal>
+          <div class="swatch" style="background:var(--color-button-orange);color:var(--color-tertiary)">
+            <span class="token-tag" style="background:rgba(15,15,67,.08);border-color:transparent">colors.button-orange</span>
+            <button class="copy-btn" type="button" data-copy="#F19A3B">Copiar</button>
+            <span class="sw-hex">#F19A3B</span>
+          </div>
+          <div class="color-info">
+            <h3>Naranja de botón</h3>
+            <p>Fondo de botones secundarios y fantasma.</p>
+            <span class="contrast-badge"><span class="ok" aria-hidden="true">✓</span> Oscuro / Botón · 8.1:1</span>
+          </div>
+        </article>
+
+        <article class="color-card" data-reveal>
+          <div class="swatch" style="background:var(--color-surface);color:var(--color-tertiary);border-bottom:1px solid var(--color-border)">
+            <span class="token-tag">colors.surface</span>
+            <button class="copy-btn" type="button" data-copy="#FCFCFC">Copiar</button>
+            <span class="sw-hex">#FCFCFC</span>
+          </div>
+          <div class="color-info">
+            <h3>Superficie</h3>
+            <p>Fondo base, casi blanco. Deja protagonismo al azul y naranja.</p>
+            <span class="contrast-badge"><span class="ok" aria-hidden="true">✓</span> Oscuro / Superficie · 17.5:1</span>
+          </div>
+        </article>
+
+        <article class="color-card" data-reveal>
+          <div class="swatch" style="background:var(--color-surface-bright);color:var(--color-tertiary);border-bottom:1px solid var(--color-border)">
+            <span class="token-tag">colors.surface-bright</span>
+            <button class="copy-btn" type="button" data-copy="#FFFFFF">Copiar</button>
+            <span class="sw-hex">#FFFFFF</span>
+          </div>
+          <div class="color-info">
+            <h3>Blanco puro</h3>
+            <p>Tarjetas, campos y máximo contraste.</p>
+            <span class="contrast-badge"><span class="ok" aria-hidden="true">✓</span> Oscuro / Blanco · 17.9:1</span>
+          </div>
+        </article>
+
+        <article class="color-card" data-reveal>
+          <div class="swatch" style="background:var(--color-primary-tint);color:var(--color-tertiary)">
+            <span class="token-tag" style="background:rgba(255,255,255,.6);border-color:transparent">colors.primary-tint</span>
+            <button class="copy-btn" type="button" data-copy="#E8EDFB">Copiar</button>
+            <span class="sw-hex">#E8EDFB</span>
+          </div>
+          <div class="color-info">
+            <h3>Tint azul</h3>
+            <p>Tonalidad suave de azul para chips y estados de foco.</p>
+            <span class="contrast-badge"><span class="ok" aria-hidden="true">✓</span> Oscuro / Tint · 15.3:1</span>
+          </div>
+        </article>
+
+        <article class="color-card" data-reveal>
+          <div class="swatch" style="background:#fff;color:var(--color-error-text);border-bottom:1px solid var(--color-error)">
+            <span class="token-tag">colors.error</span>
+            <button class="copy-btn" type="button" data-copy="#F19A3B">Copiar</button>
+            <span class="sw-hex">#F19A3B</span>
+          </div>
+          <div class="color-info">
+            <h3>Error</h3>
+            <p>Estados de error y advertencia; variación naranja. Texto en #B85C00 para cumplir AA.</p>
+            <span class="contrast-badge"><span class="ok" aria-hidden="true">✓</span> Texto error / Blanco · 4.6:1</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TYPOGRAPHY ============ -->
+  <section id="typography" aria-labelledby="typography-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Tipografía</p>
+        <h2 class="t-h2" id="typography-title">Dos familias, roles claros</h2>
+        <p>La jerarquía se logra por tamaño, peso y color — nunca por opacidad. El cuerpo nunca baja de 16px.</p>
+      </div>
+
+      <div class="type-intro">
+        <div class="tip face-bf" data-reveal>
+          <span class="face" aria-hidden="true">BF</span>
+          <div>
+            <h3 class="t-h3">Beautiful Freak Bold</h3>
+            <p>Fuente expresiva: momentos de mayor personalidad (títulos display). Nunca en textos largos ni información funcional repetitiva.</p>
+          </div>
+        </div>
+        <div class="tip face-gsf" data-reveal>
+          <span class="face" aria-hidden="true">GS</span>
+          <div>
+            <h3 class="t-h3">Google Sans Flex</h3>
+            <p>Familia principal para legibilidad: cuerpo, títulos, botones, navegación y enlaces. Extra Bold solo para los titulares más importantes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-sample" data-reveal>
+        <div class="t-display">Diseño, imaginación y propósito</div>
+        <div class="spec"><b>display</b>Beautiful Freak · 40px · 700 · lh 48px<br><span class="token-tag">typography.display</span></div>
+      </div>
+      <div class="type-sample" data-reveal>
+        <div class="t-h2">Portafolio creativo 2026</div>
+        <div class="spec"><b>h2</b>Google Sans Flex · 40px · 800<br><span class="token-tag">typography.h2</span></div>
+      </div>
+      <div class="type-sample" data-reveal>
+        <div class="t-h3">Subsección · títulos importantes</div>
+        <div class="spec"><b>h3</b>Google Sans Flex · 16px · 700<br><span class="token-tag">typography.h3</span></div>
+      </div>
+      <div class="type-sample" data-reveal>
+        <div class="t-body-lg">El cuerpo de texto prioriza la legibilidad y el tiempo del usuario, con un interlineado generoso de 30px.</div>
+        <div class="spec"><b>body-lg</b>Google Sans Flex · 20px · 400 · lh 30px<br><span class="token-tag">typography.body-lg</span></div>
+      </div>
+      <div class="type-sample" data-reveal>
+        <div class="t-body-md">Texto pequeño y metadatos: 16px es el mínimo permitido para el cuerpo.</div>
+        <div class="spec"><b>body-md</b>Google Sans Flex · 16px · 400<br><span class="token-tag">typography.body-md</span></div>
+      </div>
+      <div class="type-sample" data-reveal>
+        <div>
+          <span class="t-label">Etiqueta de campo</span><br><br>
+          <span class="t-button">Botón · 19.216px</span> &nbsp;·&nbsp;
+          <span class="t-nav">Navegación · 18px</span> &nbsp;·&nbsp;
+          <span class="t-link">Enlace · 20px</span> &nbsp;·&nbsp;
+          <span class="t-chip">Chip · 14px</span>
+        </div>
+        <div class="spec"><b>label / button / nav / link / chip</b>Google Sans Flex<br><span class="token-tag">typography.label</span></div>
+      </div>
+
+      <p class="type-note" data-reveal>Regla del sistema: «Beautiful Freak se reserva para momentos de mayor personalidad y no para información funcional repetitiva». El cuerpo del texto usa Google Sans Flex Regular a 20px.</p>
+    </div>
+  </section>
+
+  <!-- ============ LAYOUT & SPACING ============ -->
+  <section id="layout" aria-labelledby="layout-title" style="background:var(--color-surface-bright)">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Layout &amp; Espaciado</p>
+        <h2 class="t-h2" id="layout-title">Una escala de 8px</h2>
+        <p>Ancho máximo de 1440px. Rejilla de 12 columnas en escritorio, 8 en tableta (márgenes de 48px) y una sola columna en móvil (márgenes de 12–16px).</p>
+      </div>
+
+      <div class="layout-grid">
+        <div data-reveal>
+          <h3 class="t-h3" style="margin-bottom:var(--space-xl)">Escala de espaciado</h3>
+          <div class="spacing-item"><span class="val">4</span><span class="bar grad" style="width:4px"></span><span class="name">xs</span></div>
+          <div class="spacing-item"><span class="val">8</span><span class="bar" style="width:8px"></span><span class="name">sm</span></div>
+          <div class="spacing-item"><span class="val">12</span><span class="bar grad" style="width:12px"></span><span class="name">md</span></div>
+          <div class="spacing-item"><span class="val">16</span><span class="bar" style="width:16px"></span><span class="name">lg</span></div>
+          <div class="spacing-item"><span class="val">24</span><span class="bar grad" style="width:24px"></span><span class="name">xl</span></div>
+          <div class="spacing-item"><span class="val">32</span><span class="bar" style="width:32px"></span><span class="name">2xl</span></div>
+          <div class="spacing-item"><span class="val">40</span><span class="bar grad" style="width:40px"></span><span class="name">3xl</span></div>
+          <div class="spacing-item"><span class="val">48</span><span class="bar" style="width:48px"></span><span class="name">4xl</span></div>
+          <div class="spacing-item"><span class="val">92</span><span class="bar grad" style="width:92px"></span><span class="name">5xl</span></div>
+          <div class="spacing-item"><span class="val">136</span><span class="bar" style="width:136px"></span><span class="name">6xl</span></div>
+        </div>
+
+        <div data-reveal>
+          <h3 class="t-h3" style="margin-bottom:var(--space-xl)">Rejilla</h3>
+          <div class="grid-demo">
+            <h3 class="t-h3">Escritorio <span class="cols">12 columnas</span></h3>
+            <div class="grid-row" style="grid-template-columns:repeat(12,1fr)">
+              <div></div><div></div><div></div><div></div><div></div><div></div>
+              <div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <h3 class="t-h3">Tableta <span class="cols">8 columnas · margen 48px</span></h3>
+            <div class="grid-row" style="grid-template-columns:repeat(8,1fr)">
+              <div></div><div></div><div></div><div></div>
+              <div></div><div></div><div></div><div></div>
+            </div>
+            <h3 class="t-h3">Móvil <span class="cols">1 columna · margen 12–16px</span></h3>
+            <div class="grid-row" style="grid-template-columns:1fr">
+              <div class="lead"></div>
+            </div>
+          </div>
+          <p class="layout-note">El espacio en blanco es generoso e intencional: el contenido nunca va apretado y las secciones se separan por al menos 92px para crear zonas visuales claras.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ELEVATION & DEPTH ============ -->
+  <section id="elevation" aria-labelledby="elevation-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Elevación &amp; Profundidad</p>
+        <h2 class="t-h2" id="elevation-title">Capas que flotan</h2>
+        <p>Sombras suaves, transparencias y desenfoques separan los elementos del fondo. El límite del sistema es 0 8px 24px con opacidad 0.16.</p>
+      </div>
+
+      <div class="elev-grid">
+        <div class="elev-card" style="box-shadow:var(--shadow-minimal)" data-reveal>
+          <span class="elev-label">Relieve mínimo</span>
+          <div class="elev-spec">Navegación, campos y tarjetas en reposo.</div>
+          <span class="token-tag">0 1px 2px · 0.05</span>
+        </div>
+        <div class="elev-card" style="box-shadow:var(--shadow-subtle)" data-reveal>
+          <span class="elev-label">Elevación sutil</span>
+          <div class="elev-spec">Hover de tarjetas.</div>
+          <span class="token-tag">0 2px 4px · 0.08</span>
+        </div>
+        <div class="elev-card" style="box-shadow:var(--shadow-medium)" data-reveal>
+          <span class="elev-label">Elevación media</span>
+          <div class="elev-spec">Tarjetas destacadas, modales, popovers y hover de botones.</div>
+          <span class="token-tag">0 4px 12px · 0.12</span>
+        </div>
+        <div class="elev-card" style="box-shadow:var(--shadow-high)" data-reveal>
+          <span class="elev-label">Elevación alta</span>
+          <div class="elev-spec">Botones y elementos flotantes.</div>
+          <span class="token-tag">0 8px 24px · 0.16</span>
+        </div>
+      </div>
+
+      <div class="scrim-demo" data-reveal aria-hidden="true">
+        <div class="scrim-bg">
+          <div class="b"><span class="ln"></span><span class="ln l2"></span><span class="ln l3"></span></div>
+          <div class="b"><span class="ln"></span><span class="ln l2"></span></div>
+          <div class="b"><span class="ln"></span><span class="ln l2"></span><span class="ln l3"></span></div>
+        </div>
+        <div class="scrim-veil">
+          <div class="scrim-modal">
+            <h3>Modal</h3>
+            <p>Velo oscuro al 50% con desenfoque: el contenido de fondo retrocede cuando aparece un modal.</p>
+            <div class="row"><a class="btn btn-primary" href="#" onclick="return false">Aceptar</a><a class="btn btn-ghost" href="#" onclick="return false">Cancelar</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHAPES ============ -->
+  <section id="shapes" aria-labelledby="shapes-title" style="background:var(--color-surface-bright)">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Formas</p>
+        <h2 class="t-h2" id="shapes-title">Esquinas suaves, gestos experimentales</h2>
+        <p>Base de 8px, radios mayores para lo orgánico y píldoras para los botones principales. Círculos perfectos para íconos e indicadores.</p>
+      </div>
+
+      <div class="shapes-grid">
+        <div class="shape-card" data-reveal>
+          <div class="shape-box" style="border-radius:8px"></div>
+          <span class="s-label">md</span><span class="s-spec">Base · 8px</span>
+        </div>
+        <div class="shape-card" data-reveal>
+          <div class="shape-box" style="border-radius:12px"></div>
+          <span class="s-label">lg</span><span class="s-spec">Tarjetas · 12px</span>
+        </div>
+        <div class="shape-card" data-reveal>
+          <div class="shape-box" style="border-radius:16px"></div>
+          <span class="s-label">xl</span><span class="s-spec">Destacadas · 16px</span>
+        </div>
+        <div class="shape-card" data-reveal>
+          <div class="shape-box" style="border-radius:24px"></div>
+          <span class="s-label">2xl</span><span class="s-spec">Orgánico · 24px</span>
+        </div>
+        <div class="shape-card" data-reveal>
+          <div class="shape-circle"></div>
+          <span class="s-label">full</span><span class="s-spec">Círculos · 50%</span>
+        </div>
+        <div class="shape-card" data-reveal>
+          <div class="shape-pill"></div>
+          <span class="s-label">pill</span><span class="s-spec">Botones · 50px</span>
+        </div>
+      </div>
+
+      <div class="robot-row" data-reveal>
+        <div>
+          <h3 class="t-h3">El robot como identidad</h3>
+          <p>Recurso narrativo y visual recurrente: puede sobresalir de tarjetas, esconderse detrás de textos o atravesar los límites de una sección. Las formas geométricas en azul y naranja nunca son únicamente decorativas: dirigen la mirada y separan la información.</p>
+        </div>
+        <img src="assets/robotv1.svg" alt="Robot: recurso de identidad de la marca">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPONENTS ============ -->
+  <section id="components" aria-labelledby="components-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Componentes</p>
+        <h2 class="t-h2" id="components-title">Botones, tarjetas y más</h2>
+        <p>Muestras en vivo de los componentes del sistema, con sus estados. Pasa el cursor (o usa el teclado) para ver hover y foco.</p>
+      </div>
+
+      <!-- Botones -->
+      <div class="comp-block">
+        <h3><span class="idx" aria-hidden="true">1</span>Botones</h3>
+        <div class="comp-stage" data-reveal>
+          <div class="hint">Principal (píldora 50px, padding 12px 24px) · secundario · fantasma · ícono 40×40</div>
+          <div class="btn-row">
+            <button class="btn btn-primary" type="button">Acción principal</button>
+            <button class="btn btn-secondary" type="button">Acción secundaria</button>
+            <button class="btn btn-ghost" type="button">Ver más
+              <span class="arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </button>
+            <button class="btn-icon" type="button" aria-label="Buscar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            </button>
+            <button class="btn-icon light" type="button" aria-label="Favoritos">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M12 20s-7-4.5-9.5-9C1 8 2.5 5 5.5 5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 3 0 4.5 3 3 6-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+            </button>
+          </div>
+          <span class="token-tag">button-primary · pill · #0C42BC</span>
+        </div>
+      </div>
+
+      <!-- Tarjetas -->
+      <div class="comp-block">
+        <h3><span class="idx" aria-hidden="true">2</span>Tarjetas y contenedores</h3>
+        <div class="comp-stage column" data-reveal>
+          <div class="hint">Radio 8–16px · padding 24–32px · elevación sutil en hover (escala 1.01)</div>
+          <div class="card-stack">
+            <article class="card">
+              <h4>Tarjeta base</h4>
+              <p>Fondo blanco, relieve mínimo. La profundidad forma parte de la personalidad: nada completamente plano.</p>
+              <a href="#" class="t-link" style="font-size:16px;font-weight:700;text-decoration:none" onclick="return false">Leer más →</a>
+            </article>
+            <article class="card card-accent">
+              <h4>Con acento naranja</h4>
+              <p>Línea, bloque o pequeña superficie naranja para las tarjetas más importantes; el azul es estructural.</p>
+              <a href="#" class="t-link" style="font-size:16px;font-weight:700;text-decoration:none" onclick="return false">Explorar →</a>
+            </article>
+            <article class="card card-featured">
+              <h4>Destacada</h4>
+              <p>Elevación media desde el inicio (0 4px 12px · 0.12): tarjetas destacadas y popovers.</p>
+              <a href="#" class="t-link" style="font-size:16px;font-weight:700;text-decoration:none" onclick="return false">Abrir →</a>
+            </article>
+          </div>
+          <span class="token-tag">card · xl 16px · 24px 32px</span>
+        </div>
+      </div>
+
+      <!-- Campos -->
+      <div class="comp-block">
+        <h3><span class="idx" aria-hidden="true">3</span>Campos y formularios</h3>
+        <div class="comp-stage column" data-reveal>
+          <div class="hint">Radio 8px · padding 12px 16px · foco azul con halo · errores sin depender solo del color</div>
+          <form class="form-grid" onsubmit="return false">
+            <div class="field-group">
+              <label class="field-label" for="f-nombre">Nombre</label>
+              <input class="field" id="f-nombre" type="text" placeholder="Tu nombre">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="f-email">Correo</label>
+              <input class="field" id="f-email" type="email" placeholder="hola@ejemplo.com">
+            </div>
+            <div class="field-group" style="grid-column:1/-1">
+              <label class="field-label" for="f-mensaje">Mensaje</label>
+              <input class="field has-error" id="f-mensaje" type="text" value="Falta el asunto" aria-invalid="true" aria-describedby="err-mensaje">
+              <span class="error-msg" id="err-mensaje" role="alert">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 1.5 20h21L12 3Z" stroke-linejoin="round"/><path d="M12 9v5"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+                Campo obligatorio. Indica el asunto.
+              </span>
+            </div>
+          </form>
+          <span class="token-tag">input · md 8px · borde #E0E0E0</span>
+        </div>
+      </div>
+
+      <!-- Chips -->
+      <div class="comp-block">
+        <h3><span class="idx" aria-hidden="true">4</span>Etiquetas y chips</h3>
+        <div class="comp-stage" data-reveal>
+          <div class="hint">Píldora · texto 14px · fondo gris claro o tint azul · punto naranja para chips importantes</div>
+          <span class="chip">Diseño UX</span>
+          <span class="chip">Front-end</span>
+          <span class="chip chip-tint"><span class="dot" aria-hidden="true"></span>Proyecto destacado</span>
+          <span class="chip chip-tint">Identidad de marca</span>
+          <span class="token-tag">chip · pill · #FCFCFC</span>
+        </div>
+      </div>
+
+      <!-- Avatar -->
+      <div class="comp-block" id="bloque-avatar">
+        <h3><span class="idx" aria-hidden="true">5</span>Avatar</h3>
+        <div class="comp-stage" data-reveal>
+          <div>
+            <div class="avatar-wrap" role="img" aria-label="Avatar circular con capa naranja desplazada">
+              <div class="avatar-layer" aria-hidden="true"></div>
+              <div class="avatar-img"><img src="assets/Ingrid_Rosas1.svg" alt=""></div>
+            </div>
+            <p class="avatar-caption">Circular · capa naranja desplazada detrás para dar profundidad</p>
+          </div>
+          <div>
+            <div class="avatar-wrap rounded" role="img" aria-label="Avatar con contenedor redondeado de 24px">
+              <div class="avatar-layer" aria-hidden="true"></div>
+              <div class="avatar-img"><img src="assets/Ingrid_Rosas1.svg" alt=""></div>
+            </div>
+            <p class="avatar-caption">Contenedor redondeado 24px · capa azul desplazada</p>
+          </div>
+          <span class="token-tag">avatar · full · 2xl</span>
+        </div>
+      </div>
+
+      <!-- Íconos sociales -->
+      <div class="comp-block">
+        <h3><span class="idx" aria-hidden="true">6</span>Íconos sociales</h3>
+        <div class="comp-stage" data-reveal>
+          <div class="hint">Circulares 40×40 · claros con ícono azul oscuro · hover azul con ícono blanco + detalle naranja</div>
+          <div class="social-row">
+            <a class="social" href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.4" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a class="social acc" href="#" aria-label="Dribbble">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 3.8c4 3 7.4 7.2 9 12.4M3.5 12.5c5-.8 9.8.2 13.5 4M13.7 21c-1.9-4.9-2.8-9-2.7-14.2"/></svg>
+            </a>
+            <a class="social" href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.49 2.49 0 1 1 0 3.5a2.49 2.49 0 0 1 4.98 0zM.24 8.3h4.52V22.8H.24zM8.3 8.3h4.33v1.98h.06c.6-1.14 2.08-2.34 4.28-2.34 4.58 0 5.43 3.02 5.43 6.95v7.91h-4.52v-7.01c0-1.67-.03-3.82-2.33-3.82-2.33 0-2.69 1.82-2.69 3.7v7.13H8.3z"/></svg>
+            </a>
+          </div>
+          <span class="token-tag">social-icon · 40×40 · full</span>
+        </div>
+      </div>
+
+      <!-- Proyecto -->
+      <div class="comp-block">
+        <h3><span class="idx" aria-hidden="true">7</span>Tarjeta de proyecto</h3>
+        <div class="comp-stage" data-reveal>
+          <article class="project">
+            <div class="p-img"><img src="assets/robotv2.svg" alt="Kinetik — proyecto de identidad y web"></div>
+            <div class="p-body">
+              <h4>Kinetik · Identidad y web</h4>
+              <p>La imagen tiene el mayor protagonismo. El título en Extra Bold, descripción breve y etiquetas por disciplina.</p>
+              <div class="p-foot">
+                <span class="chip chip-tint"><span class="dot" aria-hidden="true"></span>Branding</span>
+                <span class="chip">Web</span>
+                <span class="p-arrow" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+              </div>
+            </div>
+          </article>
+          <span class="token-tag">project · xl 16px · hover: escala + elevación</span>
+        </div>
+      </div>
+
+      <!-- Educación -->
+      <div class="comp-block">
+        <h3><span class="idx" aria-hidden="true">8</span>Educación y experiencia</h3>
+        <div class="comp-stage column" data-reveal>
+          <div class="hint">Eje visual azul sobre línea naranja · fechas en naranja · aparición progresiva en scroll</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="date">2021 — 2025</span>
+              <h4>Lic. Diseño Gráfico Digital</h4>
+              <p>Universidad de Guadalajara. Formación en identidad, diseño editorial y sistemas de diseño.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="date">2024 — Actual</span>
+              <h4>Diseñadora freelance</h4>
+              <p>Branding y diseño web para proyectos creativos, aplicando este sistema de diseño.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero -->
+      <div class="comp-block">
+        <h3><span class="idx" aria-hidden="true">9</span>Hero</h3>
+        <div class="comp-stage column" data-reveal>
+          <div class="hero-mini">
+            <div>
+              <span class="mini-eyebrow">Hola, soy Ingrid</span>
+              <h4>Diseño <em>con</em> imaginación.</h4>
+              <p>El título principal combina Beautiful Freak Bold con Google Sans Flex Extra Bold para equilibrar personalidad y legibilidad. Elementos fuera de la cuadrícula y parallax sutil.</p>
+              <div class="btn-row">
+                <button class="btn btn-primary" type="button">Ver proyectos</button>
+                <button class="btn btn-ghost" type="button">Contáctame
+                  <span class="arrow" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <img src="assets/IRv3.svg" alt="" aria-hidden="true">
+          </div>
+          <span class="token-tag">hero · display · robot + bloques de color</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ DO'S AND DON'TS ============ -->
+  <section id="rules" aria-labelledby="rules-title" style="background:var(--color-surface-bright)">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Reglas</p>
+        <h2 class="t-h2" id="rules-title">Lo que sí y lo que no</h2>
+        <p>Guardarraíles para mantener coherencia, legibilidad y profundidad en cada pantalla.</p>
+      </div>
+
+      <div class="rules-grid">
+        <div class="rules-card do" data-reveal>
+          <h3><span class="badge" aria-hidden="true">✓</span>Sí</h3>
+          <ul>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Usa azul como color principal de interacción e identidad, y naranja como acento visual.</li>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Google Sans Flex para legibilidad; Beautiful Freak Bold solo para aportar personalidad.</li>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Cuerpo cercano a 20px en escritorio, nunca menor a 16px.</li>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Espacios amplios (48–92px+) entre secciones.</li>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Profundidad por capas, sombras suaves y movimiento funcional.</li>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Permite que algunos elementos rompan la cuadrícula de forma controlada.</li>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Usa el robot como recurso narrativo recurrente, no solo como logo.</li>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Animaciones rápidas, suaves y con intención visual.</li>
+            <li class="rule-do"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4 10-10"/></svg>Fondos blancos y gris claro para que azul y naranja protagonicen.</li>
+          </ul>
+        </div>
+        <div class="rules-card dont" data-reveal>
+          <h3><span class="badge" aria-hidden="true">✕</span>No</h3>
+          <ul>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Azul y naranja con la misma intensidad en un mismo elemento: uno domina.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Tarjetas completamente planas; la profundidad es parte de la personalidad.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Sombras superiores a 0 8px 24px · 0.16.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Beautiful Freak Bold en textos largos, formularios o lectura continua.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Tipografías adicionales (PT Sans, Raleway, etc.) que rompan el sistema.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Botones demasiado pequeños que dificulten la interacción.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Movimiento o parallax únicamente decorativo.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Llenar todos los espacios: el blanco también compone.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Abusar de bordes, sombras y degradados a la vez.</li>
+            <li class="rule-dont"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Simetría perfecta en todo: las asimetrías controladas aportan creatividad.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-grad" aria-hidden="true"></div>
+  <div class="container foot-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">IR</span>
+      <span class="brand-name">Ingrid Rosas<small>Diseño Gráfico Digital</small></span>
+    </a>
+    <p>Referencia visual del sistema de diseño · Tokens aplicados desde <a href="DESIGN.md">DESIGN.md</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- Revelado al hacer scroll (solo si hay soporte y no reduce-motion) --- */
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  /* --- Copiar hex de colores --- */
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var hex = btn.getAttribute('data-copy');
+      var ok = function(){
+        var original = btn.textContent;
+        btn.textContent = 'Copiado ✓';
+        btn.classList.add('copied');
+        setTimeout(function(){ btn.textContent = original; btn.classList.remove('copied'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(hex).then(ok).catch(ok);
+      } else { ok(); }
+    });
+  });
+
+  /* --- Parallax sutil del robot del hero (respeta reduce-motion) --- */
+  if (!reduceMotion) {
+    var robotWrap = document.getElementById('hero-robot-wrap');
+    if (robotWrap) {
+      var ticking = false;
+      window.addEventListener('scroll', function(){
+        if (!ticking) {
+          window.requestAnimationFrame(function(){
+            var y = window.scrollY;
+            if (y < window.innerHeight) {
+              robotWrap.style.transform = 'translateY(' + (y * 0.1) + 'px)';
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+  }
+
+  /* --- Navegación móvil --- */
+  var toggle = document.getElementById('nav-toggle');
+  var navList = document.getElementById('nav-list');
+  if (toggle && navList) {
+    toggle.addEventListener('click', function(){
+      var open = navList.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    });
+    navList.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        navList.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
+  }
+
+  /* --- Resaltar enlace activo según scroll --- */
+  var sections = document.querySelectorAll('main section[id]');
+  var navLinks = document.querySelectorAll('.nav-links a');
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          navLinks.forEach(function(link){
+            link.removeAttribute('aria-current');
+            if (link.getAttribute('href') === '#' + id) link.setAttribute('aria-current', 'true');
+          });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>

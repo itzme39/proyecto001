@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingrid Rosas - CV</title>
+<meta name="description" content="Landing CV de Ingrid Rosas, Disenadora Grafica Digital.">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-primary:#0C42BC;
+  --color-secondary:#FF7900;
+  --color-tertiary:#0F0F43;
+  --color-button-orange:#F19A3B;
+  --color-surface:#FCFCFC;
+  --color-surface-bright:#FFFFFF;
+  --color-text-primary:#0F0F43;
+  --color-primary-tint:#E8EDFB;
+  --color-border:#E0E0E0;
+  --color-text-muted:color-mix(in srgb, var(--color-tertiary) 62%, var(--color-surface-bright));
+  --font-display:'Beautiful Freak','Arial Black','Helvetica Neue',Arial,sans-serif;
+  --font-sans:'Inter','Helvetica Neue',Arial,sans-serif;
+  --space-xs:4px;--space-sm:8px;--space-md:12px;--space-lg:16px;
+  --space-xl:24px;--space-2xl:32px;--space-3xl:40px;--space-4xl:48px;
+  --space-5xl:92px;--space-6xl:136px;
+  --max-width:1440px;
+  --radius-md:8px;--radius-lg:12px;--radius-xl:16px;
+  --radius-2xl:24px;--radius-pill:50px;--radius-full:50%;
+  --shadow-minimal:0 1px 2px rgba(15,15,67,.05);
+  --shadow-subtle:0 2px 4px rgba(0,0,0,.08);
+  --shadow-medium:0 4px 12px rgba(0,0,0,.12);
+  --shadow-high:0 8px 24px rgba(0,0,0,.16);
+  --grad-brand:linear-gradient(100deg,var(--color-primary),var(--color-secondary));
+}
+html.dark{
+  --color-surface:#0A0A1A;
+  --color-surface-bright:#12122A;
+  --color-text-primary:#F0F0FF;
+  --color-tertiary:#D0D0F0;
+  --color-primary:#4D7FFF;
+  --color-primary-tint:#1A1A3A;
+  --color-border:#2A2A4A;
+  --color-text-muted:color-mix(in srgb, #B0B0D0 75%, var(--color-surface-bright));
+}
+@font-face{font-family:'Beautiful Freak';src:url('fonts/Beautiful-Freak-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--color-surface);color:var(--color-text-primary);font-family:var(--font-sans);font-size:20px;font-weight:400;line-height:30px;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .3s ease,color .3s ease}
+img{max-width:100%;display:block}
+a{color:var(--color-primary);text-decoration:none}
+::selection{background:var(--color-primary);color:#fff}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15}
+.container{max-width:var(--max-width);margin-inline:auto;padding-inline:var(--space-4xl)}
+section{padding-block:var(--space-5xl);scroll-margin-top:80px}
+@media(max-width:768px){.container{padding-inline:var(--space-lg)}section{padding-block:var(--space-4xl)}}
+
+/* NAV */
+.site-nav{position:sticky;top:0;z-index:50;background:rgba(252,252,252,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--color-border);transition:background .3s ease,border-color .3s ease}
+html.dark .site-nav{background:rgba(10,10,26,.85)}
+.nav-inner{display:flex;align-items:center;gap:var(--space-xl);padding-block:var(--space-lg)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--color-tertiary)}
+.brand-mark{width:40px;height:40px;border-radius:50%;overflow:hidden;background:var(--color-surface-bright);display:grid;place-items:center;box-shadow:var(--shadow-subtle);transition:transform .2s ease}
+.brand:hover .brand-mark{transform:scale(1.1) rotate(-5deg)}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-name{font-family:var(--font-display);font-weight:700;font-size:16px;line-height:1.2}
+.nav-links{display:flex;align-items:center;gap:var(--space-sm);margin-left:auto;flex-wrap:wrap}
+.nav-links a{color:var(--color-tertiary);font-size:18px;font-weight:400;text-decoration:none;padding:8px 12px;border-radius:var(--radius-md);position:relative;transition:color .15s ease}
+.nav-links a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;background:var(--grad-brand);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.22,1,.36,1)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a:hover,.nav-links a.active{color:var(--color-primary)}
+
+/* DARK MODE TOGGLE */
+.theme-toggle{width:40px;height:40px;border-radius:50%;border:1px solid var(--color-border);background:var(--color-surface-bright);color:var(--color-tertiary);cursor:pointer;display:grid;place-items:center;transition:background .2s ease,color .2s ease,transform .4s cubic-bezier(.22,1,.36,1),box-shadow .2s ease;flex:none}
+.theme-toggle:hover{transform:scale(1.1);box-shadow:var(--shadow-subtle)}
+.theme-toggle svg{width:20px;height:20px;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+html.dark .theme-toggle svg{transform:rotate(180deg)}
+.theme-toggle .icon-moon{display:block}
+.theme-toggle .icon-sun{display:none}
+html.dark .theme-toggle .icon-moon{display:none}
+html.dark .theme-toggle .icon-sun{display:block}
+
+/* TYPING EFFECT */
+.typing-wrap{display:inline-flex;align-items:center;gap:2px}
+.typing-cursor{display:inline-block;width:2px;height:1em;background:var(--color-secondary);margin-left:2px;animation:blink .8s step-end infinite;vertical-align:text-bottom}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* SKELETON */
+.skeleton{background:linear-gradient(90deg,var(--color-primary-tint) 25%,color-mix(in srgb,var(--color-primary-tint) 60%,var(--color-surface-bright)) 50%,var(--color-primary-tint) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius-lg)}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+img[data-src]{min-height:120px}
+
+/* TOOLS GRID */
+.tools-grid{display:flex;flex-wrap:wrap;gap:var(--space-xl);justify-content:center}
+.tool-logo{width:80px;height:80px;border-radius:var(--radius-xl);background:var(--color-surface-bright);border:1px solid var(--color-border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--space-sm);transition:transform .2s ease,box-shadow .2s ease,background .3s ease,border-color .3s ease}
+.tool-logo:hover{transform:translateY(-4px) scale(1.08);box-shadow:var(--shadow-medium)}
+.tool-logo svg{width:48px;height:48px;flex-shrink:0}
+.tool-logo span{font-family:var(--font-sans);font-size:11px;font-weight:700;color:var(--color-text-primary);text-align:center;line-height:1.2;margin-top:4px}
+
+/* BACK TO TOP */
+.back-to-top{position:fixed;bottom:32px;right:32px;width:48px;height:48px;border-radius:50%;background:var(--color-primary);color:#fff;border:0;cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s ease,visibility .3s ease,transform .3s ease,box-shadow .2s ease;z-index:40;box-shadow:var(--shadow-medium)}
+.back-to-top.visible{opacity:1;visibility:visible;transform:none}
+.back-to-top:hover{box-shadow:var(--shadow-high);transform:translateY(-2px) scale(1.05)}
+.back-to-top svg{width:20px;height:20px}
+.nav-toggle{display:none;margin-left:auto;width:40px;height:40px;border-radius:50%;border:1px solid var(--color-border);background:var(--color-surface-bright);color:var(--color-tertiary);cursor:pointer;place-items:center}
+.nav-toggle span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;position:relative}
+.nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .2s ease}
+.nav-toggle span::before{top:-6px}
+.nav-toggle span::after{top:6px}
+.nav-toggle[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.nav-toggle[aria-expanded="true"] span{background:transparent}
+@media(max-width:768px){
+  .nav-toggle{display:grid}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--color-surface-bright);border-bottom:1px solid var(--color-border);flex-direction:column;padding:var(--space-lg);gap:var(--space-xs);box-shadow:var(--shadow-medium)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 16px;width:100%;font-size:18px}
+}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:linear-gradient(to top,rgba(12,66,188,.32),rgba(255,121,0,.14) 60%,transparent);color:var(--color-primary);padding-block:var(--space-6xl);transition:background .3s ease}
+html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,121,0,.08) 60%,transparent)}
+.hero .container{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center}
+.hero-text h1{margin:var(--space-lg) 0;font-size:clamp(32px,5vw,56px);font-weight:700;color:var(--color-primary)}
+.hero-text .eyebrow{font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--color-primary);display:flex;align-items:center;gap:10px;margin-bottom:var(--space-md)}
+.hero-text .eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--color-secondary);flex:none}
+.hero-text .rol{font-size:20px;font-weight:400;color:var(--color-tertiary);margin-bottom:var(--space-sm)}
+.hero-text .frase{font-size:20px;line-height:30px;color:var(--color-tertiary);max-width:420px;margin-bottom:var(--space-2xl)}
+.hero-visual{display:flex;justify-content:center;align-items:center;position:relative}
+.hero-visual img{width:min(480px,100%);animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero-cta{display:flex;gap:var(--space-lg);flex-wrap:wrap}
+
+/* HERO ENTRANCE */
+.hero-text .eyebrow{opacity:0;animation:heroSlideUp .6s .2s cubic-bezier(.22,1,.36,1) forwards}
+.hero-text h1{opacity:0;animation:heroSlideUp .7s .4s cubic-bezier(.22,1,.36,1) forwards}
+.hero-text .rol{opacity:0;animation:heroSlideUp .6s .6s cubic-bezier(.22,1,.36,1) forwards}
+.hero-text .frase{opacity:0;animation:heroSlideUp .6s .8s cubic-bezier(.22,1,.36,1) forwards}
+.hero-cta{opacity:0;animation:heroSlideUp .5s 1s cubic-bezier(.22,1,.36,1) forwards}
+.hero-visual{opacity:0;animation:heroImageIn .8s .3s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes heroSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes heroImageIn{from{opacity:0;transform:scale(.9) translateX(20px)}to{opacity:1;transform:none}}
+
+@media(max-width:768px){
+  .hero{padding-block:var(--space-4xl)}
+  .hero .container{grid-template-columns:1fr;text-align:center}
+  .hero-visual{order:-1}
+  .hero-visual img{width:min(260px,80%)}
+  .hero-text .eyebrow{justify-content:center}
+  .hero-cta{justify-content:center}
+}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-sans);font-size:19px;font-weight:400;line-height:1;padding:12px 24px;border-radius:var(--radius-pill);border:0;cursor:pointer;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
+.btn:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}
+.btn-primary{background:var(--color-primary);color:#fff}
+.btn-primary:hover{box-shadow:var(--shadow-medium);transform:translateY(-1px) scale(1.01)}
+.btn-primary:active{transform:scale(.99);box-shadow:none}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* SECTION HEADERS */
+.section-head{max-width:720px;margin-bottom:var(--space-4xl)}
+.section-head .eyebrow{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--color-tertiary);margin-bottom:var(--space-lg)}
+.section-head .eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--grad-brand);flex:none}
+.section-head h2{font-size:clamp(28px,4vw,40px);font-weight:700}
+.section-head p{margin-top:var(--space-lg);color:var(--color-text-muted);font-size:20px;line-height:30px}
+
+/* ABOUT */
+.about-card{background:var(--color-surface-bright);border-radius:var(--radius-xl);padding:var(--space-3xl) var(--space-4xl);box-shadow:var(--shadow-minimal);border-left:4px solid var(--color-primary);display:grid;grid-template-columns:auto 1fr;gap:var(--space-3xl);align-items:start;transition:background .3s ease,border-color .3s ease,box-shadow .3s ease}
+.about-avatar{width:120px;height:120px;border-radius:var(--radius-full);overflow:hidden;border:3px solid var(--color-primary-tint);flex:none}
+.about-avatar img{width:100%;height:100%;object-fit:cover}
+.about-text h3{font-size:20px;font-weight:700;margin-bottom:var(--space-md)}
+.about-text p{color:var(--color-text-muted);line-height:30px}
+@media(max-width:768px){.about-card{grid-template-columns:1fr;text-align:center;padding:var(--space-2xl)}.about-avatar{margin:0 auto}}
+
+/* EDUCATION */
+.timeline{position:relative;padding-left:var(--space-3xl)}
+.timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:3px;background:var(--grad-brand);border-radius:2px}
+.timeline-item{position:relative;margin-bottom:var(--space-2xl)}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-item::before{content:"";position:absolute;left:calc(-1 * var(--space-3xl) + 4px);top:6px;width:12px;height:12px;border-radius:50%;background:var(--color-primary);border:3px solid var(--color-surface-bright);box-shadow:var(--shadow-subtle)}
+.timeline-item .date{font-size:16px;font-weight:800;color:var(--color-secondary);margin-bottom:4px}
+.timeline-item h3{font-size:20px;font-weight:700;margin-bottom:4px}
+.timeline-item p{color:var(--color-text-muted);font-size:16px}
+
+/* INTERESTS */
+.interests-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2xl)}
+.interest-card{background:var(--color-surface-bright);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-minimal);transition:transform .2s ease,box-shadow .2s ease,background .3s ease}
+.interest-card:hover{box-shadow:var(--shadow-medium);transform:scale(1.01)}
+.interest-img{aspect-ratio:4/3;background:var(--color-primary-tint);overflow:hidden}
+.interest-img img{width:100%;height:100%;object-fit:cover}
+.interest-body{padding:var(--space-xl)}
+.interest-body .icon{width:40px;height:40px;border-radius:var(--radius-full);background:var(--color-primary);color:#fff;display:grid;place-items:center;margin-bottom:var(--space-md)}
+.interest-body h3{font-size:18px;font-weight:700;margin-bottom:var(--space-sm)}
+.interest-body p{font-size:16px;line-height:24px;color:var(--color-text-muted)}
+@media(max-width:1024px){.interests-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.interests-grid{grid-template-columns:1fr}}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-xl)}
+.skill-item{display:flex;align-items:center;gap:var(--space-md);background:var(--color-surface-bright);border-radius:var(--radius-lg);padding:var(--space-lg) var(--space-xl);box-shadow:var(--shadow-minimal);transition:transform .2s ease,box-shadow .2s ease,background .3s ease}
+.skill-check{width:28px;height:28px;border-radius:var(--radius-full);background:var(--color-primary);color:#fff;display:grid;place-items:center;flex:none}
+.skill-check svg{width:14px;height:14px}
+.skill-item span{font-size:16px;font-weight:400}
+@media(max-width:768px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.skills-grid{grid-template-columns:1fr}}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2xl)}
+.project-card{background:var(--color-surface-bright);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-minimal);transition:transform .2s ease,box-shadow .2s ease,background .3s ease}
+.project-card:hover{box-shadow:var(--shadow-medium);transform:scale(1.01)}
+.project-img{aspect-ratio:16/9;background:var(--color-primary-tint);overflow:hidden}
+.project-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.project-card:hover .project-img img{transform:scale(1.05)}
+.project-body{padding:var(--space-xl)}
+.project-body h3{font-size:18px;font-weight:700;margin-bottom:var(--space-sm)}
+.project-body p{font-size:16px;line-height:24px;color:var(--color-text-muted)}
+.project-tags{display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-top:var(--space-md)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:14px;padding:4px 12px;border-radius:var(--radius-pill);background:var(--color-primary-tint);color:var(--color-primary)}
+@media(max-width:1024px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.projects-grid{grid-template-columns:1fr}}
+
+/* CONTACT */
+.contact-row{display:flex;flex-wrap:wrap;gap:var(--space-lg);justify-content:center}
+.contact-btn{display:inline-flex;align-items:center;gap:var(--space-md);background:var(--color-surface-bright);color:var(--color-tertiary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-lg) var(--space-2xl);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,color .2s ease,background .3s ease;font-size:16px;font-weight:400}
+.contact-btn:hover{border-color:var(--color-primary);color:var(--color-primary);box-shadow:var(--shadow-subtle)}
+.contact-btn svg{width:20px;height:20px;flex:none}
+.contact-btn .label{font-weight:700}
+@media(max-width:640px){.contact-row{flex-direction:column;align-items:stretch}.contact-btn{justify-content:center}}
+
+/* FOOTER */
+.site-footer{background:var(--color-tertiary);color:#fff;padding:var(--space-2xl) var(--space-4xl);text-align:center;font-size:16px;font-weight:400;position:relative;overflow:hidden}
+.site-footer::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-brand)}
+
+/* SCROLL REVEAL */
+[data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+[data-reveal].visible{opacity:1;transform:none}
+[data-reveal="left"]{transform:translateX(-30px)}
+[data-reveal="left"].visible{transform:none}
+[data-reveal="right"]{transform:translateX(30px)}
+[data-reveal="right"].visible{transform:none}
+[data-reveal="scale"]{transform:scale(.92)}
+[data-reveal="scale"].visible{transform:none}
+[data-reveal].visible{transition-delay:var(--d,0s)}
+
+/* STAGGER CHILDREN */
+[data-stagger]>*{opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
+[data-stagger].visible>*{opacity:1;transform:none}
+[data-stagger].visible>*:nth-child(1){transition-delay:.05s}
+[data-stagger].visible>*:nth-child(2){transition-delay:.12s}
+[data-stagger].visible>*:nth-child(3){transition-delay:.19s}
+[data-stagger].visible>*:nth-child(4){transition-delay:.26s}
+[data-stagger].visible>*:nth-child(5){transition-delay:.33s}
+[data-stagger].visible>*:nth-child(6){transition-delay:.4s}
+[data-stagger].visible>*:nth-child(7){transition-delay:.47s}
+[data-stagger].visible>*:nth-child(8){transition-delay:.54s}
+[data-stagger].visible>*:nth-child(9){transition-delay:.61s}
+[data-stagger].visible>*:nth-child(10){transition-delay:.68s}
+
+/* SKILL PULSE */
+.skill-item{transition:transform .2s ease,box-shadow .2s ease}
+.skill-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-subtle)}
+.skill-check{transition:transform .2s ease}
+.skill-item:hover .skill-check{transform:scale(1.15)}
+
+/* INTEREST CARD SHINE */
+.interest-card{position:relative;overflow:hidden}
+.interest-card::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);transform:translateX(-100%);transition:transform .5s ease}
+.interest-card:hover::after{transform:translateX(100%)}
+
+/* PROJECT TILT */
+.project-card{transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease}
+.project-card:hover{transform:translateY(-4px) scale(1.01)}
+
+/* TIMELINE DOT PULSE */
+.timeline-item::before{animation:none;transition:transform .2s ease,box-shadow .2s ease}
+.timeline-item:hover::before{transform:scale(1.3);box-shadow:0 0 0 6px rgba(12,66,188,.15)}
+
+/* CONTACT BUTTON LIFT */
+.contact-btn{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,color .2s ease}
+.contact-btn:hover{transform:translateY(-3px);box-shadow:var(--shadow-medium)}
+
+@media(prefers-reduced-motion:reduce){
+  [data-reveal],[data-stagger]>*{opacity:1;transform:none;transition:none}
+  .hero-text .eyebrow,.hero-text h1,.hero-text .rol,.hero-text .frase,.hero-cta,.hero-visual{opacity:1;transform:none;animation:none}
+  .hero-visual img{animation:none}
+  .typing-cursor{animation:none}
+  .tool-logo:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#hero" aria-label="Ir al inicio">
+      <span class="brand-mark" aria-hidden="true"><img src="assets/IRv3.svg" alt=""></span>
+      <span class="brand-name">Ingrid Rosas</span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Abrir menu">
+      <span aria-hidden="true"></span>
+    </button>
+    <nav class="nav-links" id="nav-list" aria-label="Navegacion principal">
+      <a href="#sobre-mi">Hola</a>
+      <a href="#educacion">Educacion</a>
+      <a href="#intereses">Intereses</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#trabajo">Mi Trabajo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </div>
+</header>
+
+<button class="back-to-top" id="back-to-top" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-text">
+        <p class="eyebrow">Disenadora Grafica Digital</p>
+        <h1>INGRID ROSAS</h1>
+        <div class="typing-wrap"><p class="rol" id="hero-typed"></p><span class="typing-cursor" aria-hidden="true"></span></div>
+        <p class="frase">Creo en un diseno con intencion: visualmente atractivo, funcional y capaz de conectar con las personas.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contacto">Contactame</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <img src="assets/Ingrid_Rosas1.svg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre-mi">
+    <div class="container">
+      <div class="section-head" data-reveal="left">
+        <p class="eyebrow">Hola</p>
+        <h2>Sobre mi</h2>
+      </div>
+      <div class="about-card" data-reveal="scale">
+        <div class="about-avatar">
+          <img src="assets/Ingrid_Rosas1.svg" alt="Ingrid Rosas" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h3>Ingrid Itzel Rosas Cabello</h3>
+          <p>Soy Ingrid Itzel Rosas Cabello (Ingrid Rosas), naci en la CDMX el 2004 y aqui vivo. Soy estudiante de Diseno Grafico Digital con un gran interes por aprender mas sobre el diseno. Me apasiona disenar para generar conexion por medio de mensajes claros.</p>
+          <br>
+          <p>Busco aprender y tener nuevas experiencias por medio del diseno, por lo que me gusta estar en constante aprendizaje y generar un impacto positivo en la sociedad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="educacion" style="background:var(--color-surface-bright)">
+    <div class="container">
+      <div class="section-head" data-reveal="right">
+        <p class="eyebrow">Formacion</p>
+        <h2>Educacion</h2>
+      </div>
+      <div class="timeline" data-reveal>
+        <div class="timeline-item">
+          <div class="date">2023 &mdash; 2027 (Actualmente)</div>
+          <h3>Licenciatura en Diseno Grafico Digital</h3>
+          <p>Universidad La Salle, Ciudad de Mexico</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="intereses">
+    <div class="container">
+      <div class="section-head" data-reveal="left">
+        <p class="eyebrow">Lo que me mueve</p>
+        <h2>Intereses</h2>
+      </div>
+      <div class="interests-grid" data-stagger>
+        <article class="interest-card" data-reveal="scale">
+          <div class="interest-img"><img src="assets/robotv1.svg" alt="Identidad de marca" loading="lazy"></div>
+          <div class="interest-body">
+            <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <h3>Identidad de Marca</h3>
+            <p>Creacion de sistemas visuales que comunican la esencia de una marca de forma coherente y memorable.</p>
+          </div>
+        </article>
+        <article class="interest-card" data-reveal="scale">
+          <div class="interest-img"><img src="assets/robotv2.svg" alt="Ilustracion" loading="lazy"></div>
+          <div class="interest-body">
+            <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg></div>
+            <h3>Ilustracion</h3>
+            <p>Exploracion visual a traves de formas, colores y narrativas que dan vida a ideas y conceptos.</p>
+          </div>
+        </article>
+        <article class="interest-card" data-reveal="scale">
+          <div class="interest-img"><img src="assets/Ingrid_Rosas1.svg" alt="Diseno Editorial" loading="lazy"></div>
+          <div class="interest-body">
+            <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <h3>Diseno Editorial</h3>
+            <p>Diseno de publicaciones impresas y digitales con jerarquia clara, tipografia cuidada y composicion equilibrada.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="habilidades" style="background:var(--color-surface-bright)">
+    <div class="container">
+      <div class="section-head" data-reveal="right">
+        <p class="eyebrow">Lo que se hacer</p>
+        <h2>Habilidades</h2>
+      </div>
+      <div class="skills-grid" data-stagger>
+        <div class="skill-item"><span class="skill-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-10"/></svg></span><span>Herramientas: Paqueteria Adobe</span></div>
+        <div class="skill-item"><span class="skill-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-10"/></svg></span><span>Principios basicos de Maya</span></div>
+        <div class="skill-item"><span class="skill-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-10"/></svg></span><span>Adaptacion</span></div>
+        <div class="skill-item"><span class="skill-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-10"/></svg></span><span>Trabajo en equipo</span></div>
+        <div class="skill-item"><span class="skill-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-10"/></svg></span><span>Comunicacion efectiva, creatividad y empatia</span></div>
+        <div class="skill-item"><span class="skill-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-10"/></svg></span><span>Ingles: intermedio (lectura tecnica fluida)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="herramientas" style="background:var(--color-surface-bright)">
+    <div class="container">
+      <div class="section-head" data-reveal="scale" style="text-align:center;margin-inline:auto">
+        <p class="eyebrow" style="justify-content:center">Dominio</p>
+        <h2>Herramientas</h2>
+      </div>
+      <div class="tools-grid" data-stagger>
+        <div class="tool-logo" data-reveal="scale"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-family="var(--font-sans)" font-weight="800" font-size="16">Ps</text></svg><span>Photoshop</span></div>
+        <div class="tool-logo" data-reveal="scale"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-family="var(--font-sans)" font-weight="800" font-size="16">Ai</text></svg><span>Illustrator</span></div>
+        <div class="tool-logo" data-reveal="scale"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-family="var(--font-sans)" font-weight="800" font-size="16">Id</text></svg><span>InDesign</span></div>
+        <div class="tool-logo" data-reveal="scale"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-family="var(--font-sans)" font-weight="800" font-size="16">Ae</text></svg><span>After Effects</span></div>
+        <div class="tool-logo" data-reveal="scale"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-family="var(--font-sans)" font-weight="800" font-size="16">M</text></svg><span>Maya</span></div>
+        <div class="tool-logo" data-reveal="scale"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-family="var(--font-sans)" font-weight="800" font-size="16">Fi</text></svg><span>Figma</span></div>
+        <div class="tool-logo" data-reveal="scale"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-family="var(--font-sans)" font-weight="800" font-size="16">Pr</text></svg><span>Premiere</span></div>
+        <div class="tool-logo" data-reveal="scale"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-family="var(--font-sans)" font-weight="800" font-size="16">C</text></svg><span>Canva</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trabajo">
+    <div class="container">
+      <div class="section-head" data-reveal="left">
+        <p class="eyebrow">Portafolio</p>
+        <h2>Mi Trabajo</h2>
+      </div>
+      <div class="projects-grid" data-stagger>
+        <article class="project-card" data-reveal="scale">
+          <div class="project-img"><img src="assets/robotv1.svg" alt="Ilustracion" loading="lazy"></div>
+          <div class="project-body">
+            <h3>Ilustracion</h3>
+            <p>Creaciones visuales que exploran formas, colores y narrativas.</p>
+            <div class="project-tags"><span class="chip">Ilustracion</span></div>
+          </div>
+        </article>
+        <article class="project-card" data-reveal="scale">
+          <div class="project-img"><img src="assets/robotv2.svg" alt="Identidad de marca" loading="lazy"></div>
+          <div class="project-body">
+            <h3>Identidad de marca</h3>
+            <p>Sistemas visuales completos para marcas con personalidad.</p>
+            <div class="project-tags"><span class="chip">Branding</span></div>
+          </div>
+        </article>
+        <article class="project-card" data-reveal="scale">
+          <div class="project-img"><img src="assets/Ingrid_Rosas1.svg" alt="Graficos en movimiento" loading="lazy"></div>
+          <div class="project-body">
+            <h3>Graficos en movimiento</h3>
+            <p>Animaciones y motion graphics con intencion narrativa.</p>
+            <div class="project-tags"><span class="chip">Motion</span></div>
+          </div>
+        </article>
+        <article class="project-card" data-reveal="scale">
+          <div class="project-img"><img src="assets/robotv1.svg" alt="Modelado" loading="lazy"></div>
+          <div class="project-body">
+            <h3>Modelado</h3>
+            <p>Modelado 3D y exploracion de formas tridimensionales.</p>
+            <div class="project-tags"><span class="chip">3D</span></div>
+          </div>
+        </article>
+        <article class="project-card" data-reveal="scale">
+          <div class="project-img"><img src="assets/robotv2.svg" alt="Campanas" loading="lazy"></div>
+          <div class="project-body">
+            <h3>Campanas</h3>
+            <p>Campanas de diseno con estrategia visual y comunicacion.</p>
+            <div class="project-tags"><span class="chip">Campana</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" style="background:var(--color-surface-bright)">
+    <div class="container" style="text-align:center">
+      <div class="section-head" data-reveal="scale" style="margin-inline:auto">
+        <p class="eyebrow" style="justify-content:center">Hablemos</p>
+        <h2>Contacto</h2>
+      </div>
+      <div class="contact-row" data-stagger>
+        <a class="contact-btn" href="mailto:ingrid.rosas@lasallistas.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+          <span class="label">Correo</span> ingrid.rosas@lasallistas.com
+        </a>
+        <a class="contact-btn" href="tel:+527713241213">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span class="label">Telefono</span> +52 771-324-1213
+        </a>
+        <a class="contact-btn" href="https://www.instagram.com/cabelloitzel/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          <span class="label">Instagram</span> @cabelloitzel
+        </a>
+        <a class="contact-btn" href="https://www.facebook.com/ingrid.cabello.1004/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          <span class="label">Facebook</span> Ingrid Cabello
+        </a>
+        <a class="contact-btn" href="https://www.behance.net/ingridrosasc" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 18.4c1.8 0 3.2-.5 4.2-1.5 1-1 1.5-2.4 1.5-4.2V6.8H9.5v5.9c0 1-.3 1.7-.8 2.2-.5.5-1.2.8-2 .8-1 0-1.7-.3-2.2-1-.5-.7-.7-1.6-.7-2.7V6.8H1v5.8c0 2.2.7 3.9 2.1 5.1 1.4 1.1 3.2 1.7 5.3 1.7h-.6zm7.6-8.4h5.2v-1.6h-5.2v1.6zM16.2 18.4c1.3 0 2.4-.5 3.2-1.4.8-1 1.3-2.2 1.3-3.6 0-1.4-.4-2.5-1.3-3.4-.8-.9-1.9-1.3-3.2-1.3-1.4 0-2.5.5-3.3 1.4-.8.9-1.3 2.1-1.3 3.4 0 1.4.4 2.6 1.3 3.6.8.9 1.9 1.3 3.3 1.3zm0-9.8c.8 0 1.5.3 2 .8.5.6.8 1.3.8 2.2 0 .9-.3 1.6-.8 2.2-.5.5-1.2.8-2 .8s-1.5-.3-2-.8c-.5-.6-.8-1.3-.8-2.2 0-.9.3-1.6.8-2.2.5-.6 1.2-.8 2-.8zm5.8 1.4h-4.8v-1.6h4.8v1.6z"/></svg>
+          <span class="label">Behance</span> ingridrosasc
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Ingrid Rosas</p>
+</footer>
+
+<script>
+(function(){
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // NAV TOGGLE
+  var toggle=document.getElementById('nav-toggle');
+  var nav=document.getElementById('nav-list');
+  toggle.addEventListener('click',function(){
+    var expanded=toggle.getAttribute('aria-expanded')==='true';
+    toggle.setAttribute('aria-expanded',String(!expanded));
+    nav.classList.toggle('open');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      toggle.setAttribute('aria-expanded','false');
+      nav.classList.remove('open');
+    });
+  });
+
+  // DARK MODE
+  var themeBtn=document.getElementById('theme-toggle');
+  var html=document.documentElement;
+  var saved=localStorage.getItem('theme');
+  if(saved==='dark')html.classList.add('dark');
+  else if(!saved&&window.matchMedia('(prefers-color-scheme: dark)').matches)html.classList.add('dark');
+  themeBtn.addEventListener('click',function(){
+    html.classList.toggle('dark');
+    localStorage.setItem('theme',html.classList.contains('dark')?'dark':'light');
+  });
+
+  // BACK TO TOP
+  var btt=document.getElementById('back-to-top');
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>400)btt.classList.add('visible');
+    else btt.classList.remove('visible');
+  },{passive:true});
+  btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+
+  // PARALLAX HERO
+  if(!reduced){
+    var heroImg=document.querySelector('.hero-visual img');
+    window.addEventListener('scroll',function(){
+      var y=window.scrollY;
+      if(y<800&&heroImg)heroImg.style.transform='translateY('+(y*.08)+'px)';
+    },{passive:true});
+  }
+
+  // TYPING EFFECT
+  if(!reduced){
+    var typed=document.getElementById('hero-typed');
+    var text='Disenadora Grafica';
+    var i=0;
+    function typeChar(){if(i<text.length){typed.textContent+=text.charAt(i);i++;setTimeout(typeChar,70+Math.random()*40)}}
+    setTimeout(typeChar,1200);
+  }else{
+    var typed=document.getElementById('hero-typed');
+    if(typed)typed.textContent='Disenadora Grafica';
+  }
+
+  // NAV ACTIVO
+  var navLinks=nav.querySelectorAll('a[href^="#"]');
+  var sections=[];
+  navLinks.forEach(function(link){
+    var id=link.getAttribute('href').slice(1);
+    var sec=document.getElementById(id);
+    if(sec)sections.push({el:sec,link:link});
+  });
+  if(!reduced&&sections.length){
+    var navObs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          navLinks.forEach(function(l){l.classList.remove('active')});
+          var match=sections.find(function(s){return s.el===e.target});
+          if(match)match.link.classList.add('active');
+        }
+      });
+    },{threshold:0.3,rootMargin:'-80px 0px -50% 0px'});
+    sections.forEach(function(s){navObs.observe(s.el)});
+  }
+
+  // SCROLL REVEAL
+  if(!reduced){
+    var reveals=document.querySelectorAll('[data-reveal],[data-stagger]');
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    reveals.forEach(function(el){observer.observe(el)});
+  }else{
+    document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el){el.classList.add('visible')});
+  }
+
+  // SKELETON LOADING
+  document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+    img.style.background='var(--color-primary-tint)';
+    img.addEventListener('load',function(){img.style.background=''});
+  });
+})();
+</script>
+</body>
+</html>

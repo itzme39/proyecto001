@@ -4,10 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ingrid Rosas - CV</title>
-<meta name="description" content="Landing CV de Ingrid Rosas, Disenadora Grafica Digital.">
+<meta name="description" content="Landing CV de Ingrid Rosas, Diseñadora Gráfica Digital.">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --color-primary:#0C42BC;
@@ -21,7 +19,7 @@
   --color-border:#E0E0E0;
   --color-text-muted:color-mix(in srgb, var(--color-tertiary) 62%, var(--color-surface-bright));
   --font-display:'Beautiful Freak','Arial Black','Helvetica Neue',Arial,sans-serif;
-  --font-sans:'Inter','Helvetica Neue',Arial,sans-serif;
+  --font-sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
   --space-xs:4px;--space-sm:8px;--space-md:12px;--space-lg:16px;
   --space-xl:24px;--space-2xl:32px;--space-3xl:40px;--space-4xl:48px;
   --space-5xl:92px;--space-6xl:136px;
@@ -45,10 +43,16 @@ html.dark{
   --color-text-muted:color-mix(in srgb, #B0B0D0 75%, var(--color-surface-bright));
 }
 @font-face{font-family:'Beautiful Freak';src:url('fonts/Beautiful-Freak-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Helvetica Neue';src:url('fonts/helvetica/HelveticaNeueLTStd-Lt.woff') format('woff');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Helvetica Neue';src:url('fonts/helvetica/HelveticaNeueLTStd-Bd.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Helvetica Neue';src:url('fonts/helvetica/HelveticaNeueLTStd-Hv.woff') format('woff');font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:'Helvetica Neue';src:url('fonts/helvetica/HelveticaNeueLTStd-It.woff') format('woff');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Helvetica';src:url('fonts/helvetica/HelveticaLTStd-Roman.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Helvetica';src:url('fonts/helvetica/HelveticaLTStd-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--color-surface);color:var(--color-text-primary);font-family:var(--font-sans);font-size:20px;font-weight:400;line-height:30px;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .3s ease,color .3s ease}
+body{background:var(--color-surface);color:var(--color-text-primary);font-family:var(--font-sans);font-size:20px;font-weight:300;line-height:30px;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .3s ease,color .3s ease}
 img{max-width:100%;display:block}
 a{color:var(--color-primary);text-decoration:none}
 ::selection{background:var(--color-primary);color:#fff}
@@ -165,14 +169,14 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 .section-head .eyebrow{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--color-tertiary);margin-bottom:var(--space-lg)}
 .section-head .eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--grad-brand);flex:none}
 .section-head h2{font-size:clamp(28px,4vw,40px);font-weight:700}
-.section-head p{margin-top:var(--space-lg);color:var(--color-text-muted);font-size:20px;line-height:30px}
+.section-head p{margin-top:var(--space-lg);color:var(--color-text-muted);font-size:20px;line-height:30px;font-weight:300}
 
 /* ABOUT */
 .about-card{background:var(--color-surface-bright);border-radius:var(--radius-xl);padding:var(--space-3xl) var(--space-4xl);box-shadow:var(--shadow-minimal);border-left:4px solid var(--color-primary);display:grid;grid-template-columns:auto 1fr;gap:var(--space-3xl);align-items:start;transition:background .3s ease,border-color .3s ease,box-shadow .3s ease}
 .about-avatar{width:120px;height:120px;border-radius:var(--radius-full);overflow:hidden;border:3px solid var(--color-primary-tint);flex:none}
 .about-avatar img{width:100%;height:100%;object-fit:cover}
 .about-text h3{font-size:20px;font-weight:700;margin-bottom:var(--space-md)}
-.about-text p{color:var(--color-text-muted);line-height:30px}
+.about-text p{color:var(--color-text-muted);line-height:30px;font-weight:300}
 @media(max-width:768px){.about-card{grid-template-columns:1fr;text-align:center;padding:var(--space-2xl)}.about-avatar{margin:0 auto}}
 
 /* EDUCATION */
@@ -194,7 +198,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 .interest-body{padding:var(--space-xl)}
 .interest-body .icon{width:40px;height:40px;border-radius:var(--radius-full);background:var(--color-primary);color:#fff;display:grid;place-items:center;margin-bottom:var(--space-md)}
 .interest-body h3{font-size:18px;font-weight:700;margin-bottom:var(--space-sm)}
-.interest-body p{font-size:16px;line-height:24px;color:var(--color-text-muted)}
+.interest-body p{font-size:16px;line-height:24px;color:var(--color-text-muted);font-weight:300}
 @media(max-width:1024px){.interests-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.interests-grid{grid-template-columns:1fr}}
 
@@ -203,7 +207,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 .skill-item{display:flex;align-items:center;gap:var(--space-md);background:var(--color-surface-bright);border-radius:var(--radius-lg);padding:var(--space-lg) var(--space-xl);box-shadow:var(--shadow-minimal);transition:transform .2s ease,box-shadow .2s ease,background .3s ease}
 .skill-check{width:28px;height:28px;border-radius:var(--radius-full);background:var(--color-primary);color:#fff;display:grid;place-items:center;flex:none}
 .skill-check svg{width:14px;height:14px}
-.skill-item span{font-size:16px;font-weight:400}
+.skill-item span{font-size:16px;font-weight:300}
 @media(max-width:768px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.skills-grid{grid-template-columns:1fr}}
 
@@ -216,7 +220,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 .project-card:hover .project-img img{transform:scale(1.05)}
 .project-body{padding:var(--space-xl)}
 .project-body h3{font-size:18px;font-weight:700;margin-bottom:var(--space-sm)}
-.project-body p{font-size:16px;line-height:24px;color:var(--color-text-muted)}
+.project-body p{font-size:16px;line-height:24px;color:var(--color-text-muted);font-weight:300}
 .project-tags{display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-top:var(--space-md)}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:14px;padding:4px 12px;border-radius:var(--radius-pill);background:var(--color-primary-tint);color:var(--color-primary)}
 @media(max-width:1024px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
@@ -302,9 +306,9 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Abrir menu">
       <span aria-hidden="true"></span>
     </button>
-    <nav class="nav-links" id="nav-list" aria-label="Navegacion principal">
+    <nav class="nav-links" id="nav-list" aria-label="Navegación principal">
       <a href="#sobre-mi">Hola</a>
-      <a href="#educacion">Educacion</a>
+      <a href="#educacion">Educación</a>
       <a href="#intereses">Intereses</a>
       <a href="#habilidades">Habilidades</a>
       <a href="#trabajo">Mi Trabajo</a>
@@ -326,12 +330,12 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
   <section class="hero" id="hero">
     <div class="container">
       <div class="hero-text">
-        <p class="eyebrow">Disenadora Grafica Digital</p>
+        <p class="eyebrow">Diseñadora Gráfica Digital</p>
         <h1>INGRID ROSAS</h1>
         <div class="typing-wrap"><p class="rol" id="hero-typed"></p><span class="typing-cursor" aria-hidden="true"></span></div>
-        <p class="frase">Creo en un diseno con intencion: visualmente atractivo, funcional y capaz de conectar con las personas.</p>
+        <p class="frase">Creo en un diseño con intención: visualmente atractivo, funcional y capaz de conectar con las personas.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#contacto">Contactame</a>
+          <a class="btn btn-primary" href="#contacto">Contáctame</a>
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
@@ -352,9 +356,9 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
         </div>
         <div class="about-text">
           <h3>Ingrid Itzel Rosas Cabello</h3>
-          <p>Soy Ingrid Itzel Rosas Cabello (Ingrid Rosas), naci en la CDMX el 2004 y aqui vivo. Soy estudiante de Diseno Grafico Digital con un gran interes por aprender mas sobre el diseno. Me apasiona disenar para generar conexion por medio de mensajes claros.</p>
+          <p>Soy Ingrid Itzel Rosas Cabello (Ingrid Rosas), nací en la CDMX el 2004 y aquí vivo. Soy estudiante de Diseño Gráfico Digital con un gran interés por aprender más sobre el diseño. Me apasiona diseñar para generar conexión por medio de mensajes claros.</p>
           <br>
-          <p>Busco aprender y tener nuevas experiencias por medio del diseno, por lo que me gusta estar en constante aprendizaje y generar un impacto positivo en la sociedad.</p>
+          <p>Busco aprender y tener nuevas experiencias por medio del diseño, por lo que me gusta estar en constante aprendizaje y generar un impacto positivo en la sociedad.</p>
         </div>
       </div>
     </div>
@@ -369,7 +373,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
       <div class="timeline" data-reveal>
         <div class="timeline-item">
           <div class="date">2023 &mdash; 2027 (Actualmente)</div>
-          <h3>Licenciatura en Diseno Grafico Digital</h3>
+          <h3>Licenciatura en Diseño Gráfico Digital</h3>
           <p>Universidad La Salle, Ciudad de Mexico</p>
         </div>
       </div>
@@ -400,11 +404,11 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
           </div>
         </article>
         <article class="interest-card" data-reveal="scale">
-          <div class="interest-img"><img src="assets/Ingrid_Rosas1.svg" alt="Diseno Editorial" loading="lazy"></div>
+          <div class="interest-img"><img src="assets/Ingrid_Rosas1.svg" alt="Diseño Editorial" loading="lazy"></div>
           <div class="interest-body">
             <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-            <h3>Diseno Editorial</h3>
-            <p>Diseno de publicaciones impresas y digitales con jerarquia clara, tipografia cuidada y composicion equilibrada.</p>
+            <h3>Diseño Editorial</h3>
+            <p>Diseño de publicaciones impresas y digitales con jerarquía clara, tipografía cuidada y composición equilibrada.</p>
           </div>
         </article>
       </div>
@@ -414,7 +418,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
   <section id="habilidades" style="background:var(--color-surface-bright)">
     <div class="container">
       <div class="section-head" data-reveal="right">
-        <p class="eyebrow">Lo que se hacer</p>
+        <p class="eyebrow">Lo que sé hacer</p>
         <h2>Habilidades</h2>
       </div>
       <div class="skills-grid" data-stagger>
@@ -474,7 +478,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
           <div class="project-img"><img src="assets/Ingrid_Rosas1.svg" alt="Graficos en movimiento" loading="lazy"></div>
           <div class="project-body">
             <h3>Graficos en movimiento</h3>
-            <p>Animaciones y motion graphics con intencion narrativa.</p>
+            <p>Animaciones y motion graphics con intención narrativa.</p>
             <div class="project-tags"><span class="chip">Motion</span></div>
           </div>
         </article>
@@ -482,7 +486,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
           <div class="project-img"><img src="assets/robotv1.svg" alt="Modelado" loading="lazy"></div>
           <div class="project-body">
             <h3>Modelado</h3>
-            <p>Modelado 3D y exploracion de formas tridimensionales.</p>
+            <p>Modelado 3D y exploración de formas tridimensionales.</p>
             <div class="project-tags"><span class="chip">3D</span></div>
           </div>
         </article>
@@ -490,7 +494,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
           <div class="project-img"><img src="assets/robotv2.svg" alt="Campanas" loading="lazy"></div>
           <div class="project-body">
             <h3>Campanas</h3>
-            <p>Campanas de diseno con estrategia visual y comunicacion.</p>
+            <p>Campañas de diseño con estrategia visual y comunicación.</p>
             <div class="project-tags"><span class="chip">Campana</span></div>
           </div>
         </article>
@@ -585,13 +589,13 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
   // TYPING EFFECT
   if(!reduced){
     var typed=document.getElementById('hero-typed');
-    var text='Disenadora Grafica';
+    var text='Diseñadora Gráfica';
     var i=0;
     function typeChar(){if(i<text.length){typed.textContent+=text.charAt(i);i++;setTimeout(typeChar,70+Math.random()*40)}}
     setTimeout(typeChar,1200);
   }else{
     var typed=document.getElementById('hero-typed');
-    if(typed)typed.textContent='Disenadora Grafica';
+    if(typed)typed.textContent='Diseñadora Gráfica';
   }
 
   // NAV ACTIVO

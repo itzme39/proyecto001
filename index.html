@@ -222,6 +222,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 .project-card:hover{box-shadow:var(--shadow-medium);transform:scale(1.01)}
 .project-img{aspect-ratio:16/9;background:var(--color-primary-tint);overflow:hidden}
 .project-img img,.project-img video{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.project-img.video-zoom video{object-fit:cover;transform:scale(1.3)}
 .project-card:hover .project-img img{transform:scale(1.05)}
 .project-body{padding:var(--space-xl)}
 .project-body h3{font-size:18px;font-weight:700;margin-bottom:var(--space-sm)}
@@ -511,7 +512,7 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
           </div>
         </article>
         <article class="project-card" data-reveal="scale">
-          <div class="project-img"><video src="imagenes/Tipognoma_vfinal.mp4" poster="imagenes/tipognoma.png" muted loop playsinline loading="lazy" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;this.load()" style="object-fit:cover;width:120%;height:120%;margin:-10%"></video></div>
+          <div class="project-img video-zoom"><video src="imagenes/Tipognoma_vfinal.mp4" poster="imagenes/tipognoma.png" muted loop playsinline loading="lazy" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;this.load()"></video></div>
           <div class="project-body">
             <h3>Graficos en movimiento</h3>
             <p>Animaciones y motion graphics con intención narrativa.</p>

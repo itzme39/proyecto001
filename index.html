@@ -304,6 +304,11 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 .lightbox img,.lightbox video{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:var(--radius-lg)}
 .lightbox-close{position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.15);border:0;color:#fff;font-size:28px;cursor:pointer;display:grid;place-items:center;transition:background .2s ease,transform .2s ease;z-index:101}
 .lightbox-close:hover{background:rgba(255,255,255,.3);transform:scale(1.1)}
+.lightbox-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.15);border:0;color:#fff;font-size:22px;cursor:pointer;display:none;place-items:center;transition:background .2s ease,transform .2s ease;z-index:101}
+.lightbox-arrow:hover{background:rgba(255,255,255,.3);transform:translateY(-50%) scale(1.1)}
+.lightbox-prev{left:20px}
+.lightbox-next{right:20px}
+.lightbox.has-arrows .lightbox-arrow{display:grid}
 #lightbox-content{display:flex;align-items:center;justify-content:center}
 #lightbox-content .project-img{position:relative;width:auto;height:auto;max-width:90vw;max-height:85vh;background:transparent !important;border-radius:0;overflow:visible;box-shadow:none;display:block}
 #lightbox-content .project-img .project-body{display:none}
@@ -568,6 +573,8 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+  <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Anterior">&#10094;</button>
+  <button class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Siguiente">&#10095;</button>
   <div id="lightbox-content"></div>
 </div>
 
@@ -683,28 +690,67 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
   var lightbox=document.getElementById('lightbox');
   var lightboxContent=document.getElementById('lightbox-content');
   var lightboxClose=document.getElementById('lightbox-close');
+  var lightboxPrev=document.getElementById('lightbox-prev');
+  var lightboxNext=document.getElementById('lightbox-next');
   var projectImgs=document.querySelectorAll('.project-img');
+  var currentSlide=0;
+  var totalSlides=0;
 
   projectImgs.forEach(function(container){
-    container.addEventListener('click',function(){
+    container.addEventListener('click',function(e){
+      e.stopPropagation();
       var clone=container.cloneNode(true);
       clone.style.cursor='default';
       lightboxContent.innerHTML='';
       lightboxContent.appendChild(clone);
+
+      if(clone.classList.contains('carousel')){
+        var slides=clone.querySelectorAll('.carousel-slide');
+        totalSlides=slides.length;
+        currentSlide=0;
+        updateSlide(clone);
+        lightbox.classList.add('has-arrows');
+      }else{
+        totalSlides=0;
+        lightbox.classList.remove('has-arrows');
+      }
+
       lightbox.classList.add('open');
       document.body.style.overflow='hidden';
     });
   });
 
+  function updateSlide(container){
+    var slides=container.querySelectorAll('.carousel-slide');
+    slides.forEach(function(s,i){s.classList.toggle('active',i===currentSlide)});
+  }
+
+  function navigateSlide(dir){
+    var clone=lightboxContent.querySelector('.carousel');
+    if(!clone)return;
+    var slides=clone.querySelectorAll('.carousel-slide');
+    currentSlide=(currentSlide+dir+slides.length)%slides.length;
+    updateSlide(clone);
+  }
+
+  lightboxPrev.addEventListener('click',function(e){e.stopPropagation();navigateSlide(-1)});
+  lightboxNext.addEventListener('click',function(e){e.stopPropagation();navigateSlide(1)});
+
   function closeLightbox(){
-    lightbox.classList.remove('open');
+    lightbox.classList.remove('open','has-arrows');
     document.body.style.overflow='';
     lightboxContent.innerHTML='';
   }
 
   lightboxClose.addEventListener('click',closeLightbox);
   lightbox.addEventListener('click',function(e){if(e.target===lightbox)closeLightbox()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox()});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape')closeLightbox();
+    if(lightbox.classList.contains('open')&&lightbox.classList.contains('has-arrows')){
+      if(e.key==='ArrowLeft')navigateSlide(-1);
+      if(e.key==='ArrowRight')navigateSlide(1);
+    }
+  });
 
   // SKELETON LOADING
   document.querySelectorAll('img[loading="lazy"]').forEach(function(img){

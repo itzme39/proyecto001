@@ -291,6 +291,13 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 .contact-btn{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,color .2s ease}
 .contact-btn:hover{transform:translateY(-3px);box-shadow:var(--shadow-medium)}
 
+/* CAROUSEL */
+.carousel{position:relative;overflow:hidden}
+.carousel .carousel-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .8s ease}
+.carousel .carousel-slide.active{position:relative;opacity:1}
+
+@keyframes fadeSlide{0%,100%{opacity:0}10%,90%{opacity:1}}
+
 @media(prefers-reduced-motion:reduce){
   [data-reveal],[data-stagger]>*{opacity:1;transform:none;transition:none}
   .hero-text .eyebrow,.hero-text h1,.hero-text .rol,.hero-text .frase,.hero-cta,.hero-visual{opacity:1;transform:none;animation:none}
@@ -464,7 +471,11 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
       </div>
       <div class="projects-grid" data-stagger>
         <article class="project-card" data-reveal="scale">
-          <div class="project-img" style="background:#fff"><img src="imagenes/captura-ilustracion.png" alt="Ilustracion" loading="lazy" style="object-fit:contain"></div>
+          <div class="project-img carousel" style="background:#fff">
+            <img src="imagenes/captura-ilustracion.png" alt="Ilustracion 1" class="carousel-slide active" loading="lazy" style="object-fit:contain">
+            <img src="imagenes/ilustracion-2.png" alt="Ilustracion 2" class="carousel-slide" loading="lazy" style="object-fit:contain">
+            <img src="imagenes/ilustracion-3.png" alt="Ilustracion 3" class="carousel-slide" loading="lazy" style="object-fit:contain">
+          </div>
           <div class="project-body">
             <h3>Ilustracion</h3>
             <p>Creaciones visuales que exploran formas, colores y narrativas.</p>
@@ -634,6 +645,19 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
   }else{
     document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el){el.classList.add('visible')});
   }
+
+  // CAROUSEL AUTO-SLIDE
+  var carousels=document.querySelectorAll('.carousel');
+  carousels.forEach(function(carousel){
+    var slides=carousel.querySelectorAll('.carousel-slide');
+    if(slides.length<=1)return;
+    var current=0;
+    setInterval(function(){
+      slides[current].classList.remove('active');
+      current=(current+1)%slides.length;
+      slides[current].classList.add('active');
+    },3000);
+  });
 
   // SKELETON LOADING
   document.querySelectorAll('img[loading="lazy"]').forEach(function(img){

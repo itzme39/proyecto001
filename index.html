@@ -298,6 +298,21 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 
 @keyframes fadeSlide{0%,100%{opacity:0}10%,90%{opacity:1}}
 
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
+.lightbox.open{opacity:1;visibility:visible}
+.lightbox img,.lightbox video{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:var(--radius-lg)}
+.lightbox-close{position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.15);border:0;color:#fff;font-size:28px;cursor:pointer;display:grid;place-items:center;transition:background .2s ease,transform .2s ease;z-index:101}
+.lightbox-close:hover{background:rgba(255,255,255,.3);transform:scale(1.1)}
+#lightbox-content{display:flex;align-items:center;justify-content:center}
+#lightbox-content .project-img{position:relative;width:auto;height:auto;max-width:90vw;max-height:85vh;background:transparent !important;border-radius:0;overflow:visible;box-shadow:none;display:block}
+#lightbox-content .project-img .project-body{display:none}
+#lightbox-content .project-img img,.lightbox-content .project-img video{width:auto;height:auto;max-width:90vw;max-height:85vh;object-fit:contain;border-radius:0}
+#lightbox-content .project-img.carousel{display:block}
+#lightbox-content .project-img.carousel .carousel-slide{position:relative;width:auto;height:auto;max-width:90vw;max-height:85vh;object-fit:contain;border-radius:0}
+#lightbox-content .project-img.carousel .carousel-slide:not(.active){display:none}
+.project-img{cursor:pointer}
+
 @media(prefers-reduced-motion:reduce){
   [data-reveal],[data-stagger]>*{opacity:1;transform:none;transition:none}
   .hero-text .eyebrow,.hero-text h1,.hero-text .rol,.hero-text .frase,.hero-cta,.hero-visual{opacity:1;transform:none;animation:none}
@@ -551,6 +566,11 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
 
 </main>
 
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+  <div id="lightbox-content"></div>
+</div>
+
 <footer class="site-footer">
   <p>&copy; 2026 Ingrid Rosas</p>
 </footer>
@@ -658,6 +678,33 @@ html.dark .hero{background:linear-gradient(to top,rgba(77,127,255,.15),rgba(255,
       slides[current].classList.add('active');
     },3000);
   });
+
+  // LIGHTBOX
+  var lightbox=document.getElementById('lightbox');
+  var lightboxContent=document.getElementById('lightbox-content');
+  var lightboxClose=document.getElementById('lightbox-close');
+  var projectImgs=document.querySelectorAll('.project-img');
+
+  projectImgs.forEach(function(container){
+    container.addEventListener('click',function(){
+      var clone=container.cloneNode(true);
+      clone.style.cursor='default';
+      lightboxContent.innerHTML='';
+      lightboxContent.appendChild(clone);
+      lightbox.classList.add('open');
+      document.body.style.overflow='hidden';
+    });
+  });
+
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow='';
+    lightboxContent.innerHTML='';
+  }
+
+  lightboxClose.addEventListener('click',closeLightbox);
+  lightbox.addEventListener('click',function(e){if(e.target===lightbox)closeLightbox()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox()});
 
   // SKELETON LOADING
   document.querySelectorAll('img[loading="lazy"]').forEach(function(img){

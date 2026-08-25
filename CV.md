@@ -53,13 +53,14 @@ Cuadrícula de elementos con ícono de palomita:
 
 ## 7. Mi Trabajo
 
-Tarjetas con espacio para ilustración:
+Tarjetas de portafolio con espacio para imagen y descripción. Las tarjetas de Ilustración y Editorial incluyen carrusel automático con varias imágenes. Al hacer clic en cualquier imagen se abre un lightbox con vista amplia y flechas de navegación (para carruseles).
 
-- Ilustración
+- Ilustración (carrusel con 3 ilustraciones)
 - Identidad de marca
-- Gráficos en movimiento
+- Gráficos en movimiento (video con poster)
 - Modelado
 - Campañas
+- Editorial (carrusel con 2 cubiertas de libros)
 
 ## 8. Contacto
 

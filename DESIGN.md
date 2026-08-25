@@ -20,50 +20,50 @@ typography:
     fontWeight: 700
     lineHeight: 48px
   h1:
-    fontFamily: Google Sans Flex
-    fontSize: 40px
+    fontFamily: Beautiful Freak
+    fontSize: clamp(32px, 5vw, 56px)
     fontWeight: 700
   h2:
-    fontFamily: Google Sans Flex
-    fontSize: 40px
-    fontWeight: 800 # REVISAR: Extra Bold, peso exacto no especificado
+    fontFamily: Beautiful Freak
+    fontSize: clamp(28px, 4vw, 40px)
+    fontWeight: 700
   h3:
-    fontFamily: Google Sans Flex
-    fontSize: 16px
+    fontFamily: Beautiful Freak
+    fontSize: 20px
     fontWeight: 700
   body-lg:
-    fontFamily: Google Sans Flex
+    fontFamily: Helvetica Neue
     fontSize: 20px
-    fontWeight: 400
+    fontWeight: 300
     lineHeight: 30px
   body-md:
-    fontFamily: Google Sans Flex
+    fontFamily: Helvetica Neue
     fontSize: 16px
-    fontWeight: 400
+    fontWeight: 300
   list:
-    fontFamily: Google Sans Flex
-    fontSize: 20px
-    fontWeight: 400
+    fontFamily: Helvetica Neue
+    fontSize: 16px
+    fontWeight: 300
   label:
-    fontFamily: Google Sans Flex
+    fontFamily: Helvetica Neue
     fontSize: 16px
     fontWeight: 800
   button:
-    fontFamily: Google Sans Flex
-    fontSize: 19.216px # ≈19px según la sección de componentes
-    fontWeight: 400
+    fontFamily: Helvetica Neue
+    fontSize: 19px
+    fontWeight: 700
   nav:
-    fontFamily: Google Sans Flex
-    fontSize: 18px # REVISAR: rango del doc 18–20px
+    fontFamily: Helvetica Neue
+    fontSize: 18px
     fontWeight: 400
   link:
-    fontFamily: Google Sans Flex
+    fontFamily: Helvetica Neue
     fontSize: 20px
-    fontWeight: 400
+    fontWeight: 300
   chip:
-    fontFamily: Google Sans Flex
-    fontSize: 14px # REVISAR: rango del doc 13–16px
-    fontWeight: 400
+    fontFamily: Helvetica Neue
+    fontSize: 14px
+    fontWeight: 700
 rounded:
   md: 8px
   lg: 12px
@@ -188,23 +188,35 @@ Ver bloque YAML `colors`. Referencias: {colors.primary}, {colors.secondary}, {co
 
 Se usan dos familias con roles claros:
 
-- **Beautiful Freak Bold:** fuente principal, para el cuerpo de texto, la navegación y el contenido general. Se entrega localmente como `fonts/Beautiful-Freak-Bold.woff`.
-- **Google Sans Flex:** fuente secundaria, para títulos, botones y énfasis. La versión **Extra Bold** se reserva para los títulos más importantes.
+- **Beautiful Freak Bold:** fuente display para títulos e identidad. Se entrega localmente como `fonts/Beautiful-Freak-Bold.woff` con peso 700.
+- **Helvetica Neue:** fuente principal para cuerpo, navegación y contenido general. Disponible en pesos 300 (Light), 400 (Regular), 700 (Bold) y 800 (Heavy). Se entrega localmente como `fonts/helvetica/HelveticaNeueLTStd-*.woff`.
+- **Helvetica:** fuente complementaria en pesos 400 (Roman) y 700 (Bold).
 
-Tamaños:
-- **Display:** Beautiful Freak Bold a 40px con interlineado de 48px (el título más grande).
-- **Título 1:** Google Sans Flex Extra Bold a 40px con peso 700.
-- **Título 2:** Google Sans Flex Extra Bold a 40px.
-- **Título 3 (subsecciones):** Google Sans Flex Extra Bold a 16px con peso 700.
-- **Cuerpo de texto:** Google Sans Flex Regular a 20px con interlineado de 30px.
-- **Ítems de lista:** Google Sans Flex Regular a 20px.
-- **Texto pequeño:** Google Sans Flex Regular a 16px.
-- **Etiqueta de botones:** Google Sans Flex Regular a ~19px (19.216px).
-- **Enlaces:** Google Sans Flex Regular a 20px.
+### Jerarquía de pesos tipográficos
 
-La jerarquía siempre se logra con tamaño, peso y color, nunca con opacidad. El cuerpo nunca baja de 16px, y Google Sans Flex Extra Bold se usa con moderación, solo para los titulares más importantes. Beautiful Freak se reserva para momentos de mayor personalidad y no para información funcional repetitiva.
+| Peso | Uso | Elementos |
+|------|-----|-----------|
+| 800 (Heavy) | Eyebrows, fechas | `.eyebrow`, `.timeline-item .date` |
+| 700 (Bold) | Títulos, marcas, labels | `h1-h4`, `.brand-name`, `.chip`, `.btn`, `.tool-logo span` |
+| 500 (Medium) | Botones | `.btn` |
+| 400 (Regular) | Navegación, habilidades | `.nav-links a`, `.skill-item span`, `.contact-btn` |
+| 300 (Light) | Cuerpo de texto | `body`, `.section-head p`, `.timeline-item p`, `.interest-body p` |
 
-> `REVISAR` — el doc describe Beautiful Freak como fuente "principal" para el cuerpo, pero también fija el cuerpo en Google Sans Flex Regular a 20px. Este archivo toma como normativo el token `body-lg` (Google Sans Flex Regular); revisar cuál es el comportamiento deseado.
+### Tamaños
+
+- **Display:** Beautiful Freak Bold a 40px con interlineado de 48px.
+- **Título 1 (h1):** Beautiful Freak Bold a clamp(32px, 5vw, 56px), peso 700.
+- **Título 2 (h2):** Beautiful Freak Bold a clamp(28px, 4vw, 40px), peso 700.
+- **Título 3 (h3):** Beautiful Freak Bold a 20px, peso 700.
+- **Cuerpo de texto:** Helvetica Neue Light a 20px con interlineado de 30px.
+- **Ítems de lista:** Helvetica Neue Light a 16px.
+- **Texto pequeño:** Helvetica Neue Regular a 16px.
+- **Etiquetas de botones:** Helvetica Neue Bold a 19px.
+- **Chips:** Helvetica Neue Bold a 14px.
+- **Navegación:** Helvetica Neue Regular a 18px.
+- **Habilidades:** Helvetica Neue Regular a 16px.
+
+La jerarquía se logra con tamaño, peso y color. El cuerpo nunca baja de 16px. Helvetica Neue Heavy (800) se reserva para eyebrows y fechas. Beautiful Freak se usa únicamente para títulos y display.
 
 ### Design Tokens
 
@@ -282,7 +294,7 @@ Botones circulares de 40×40px, inicialmente con fondos claros e íconos en {col
 
 ### Etiquetas y chips
 
-Formas tipo píldora con fondo gris muy claro o azul en tonalidades suaves. Texto en Google Sans Flex Regular entre 13px y 16px. Los chips importantes pueden incorporar puntos, íconos o detalles en naranja para crear contraste.
+Formas tipo píldora con fondo en tonalidades suaves de azul. Texto en Helvetica Neue Bold a 14px.
 
 ### Avatar
 
@@ -290,11 +302,19 @@ La fotografía de perfil se presenta en forma circular o en contenedor redondead
 
 ### Tarjetas de proyectos
 
-Tarjetas visuales donde la imagen tiene mayor protagonismo. Título en Google Sans Flex Extra Bold, descripción breve en Google Sans Flex Regular y etiquetas que identifican disciplinas, herramientas o categorías. En hover, la imagen aumenta ligeramente de escala mientras la tarjeta se eleva; puede aparecer una flecha, número o elemento gráfico en naranja indicando contenido adicional.
+Tarjetas visuales donde la imagen tiene mayor protagonismo. Título en Beautiful Freak Bold, descripción breve en Helvetica Neue Light y etiquetas (chips) que identifican disciplinas. En hover, la imagen aumenta ligeramente de escala mientras la tarjeta se eleva. Algunas tarjetas incluyen carrusel automático (Ilustración, Editorial) o video con poster (Gráficos en movimiento). Al hacer clic en cualquier imagen se abre un lightbox con vista amplia; los carruseles incluyen flechas de navegación.
+
+### Carrusel
+
+Componente de imágenes con transición automática cada 3 segundos. Las imágenes se ocultan con `visibility:hidden` y se muestran con fade. El carrusel se imprime en el lightbox con flechas de navegación izquierda/derecha, también navegables con las teclas del teclado (← →).
+
+### Lightbox
+
+Modal a pantalla completa con fondo oscuro (`rgba(0,0,0,.9)`). Muestra la imagen o video del proyecto en tamaño amplio. Incluye botón de cerrar (×) y se cierra con Escape o clic fuera del contenido. Los carruseles muestran flechas de navegación. El scroll del body se bloquea mientras está abierto.
 
 ### Educación y experiencia
 
-Tarjetas o bloques organizados verticalmente. Una línea azul o naranja puede funcionar como eje visual conectando etapas. El título o puesto usa Google Sans Flex Extra Bold, las fechas y descripciones Google Sans Flex Regular. Los elementos pueden aparecer progresivamente durante el scroll para reforzar la sensación de recorrido.
+Tarjetas o bloques organizados verticalmente con línea temporal. Una línea degradada (azul a naranja) funciona como eje visual conectando etapas. El título usa Beautiful Freak Bold, las fechas Helvetica Neue Heavy (800) en naranja y las descripciones Helvetica Neue Light. Los elementos aparecen progresivamente durante el scroll.
 
 ### Design Tokens
 
@@ -329,11 +349,13 @@ Ver bloque YAML `components` (`button-primary*`, `button-secondary`, `button-gho
 
 ## Review Notes
 
-Valores completados (marcados con `REVISAR` en el archivo):
-1. `colors.text-primary` → #0F0F43 (el doc no define el color del cuerpo).
-2. `colors.primary-tint` → #E8EDFB (tono suave de azul para chips).
-3. `colors.error` → #F19A3B (variante naranja para errores).
-4. `colors.border` → #E0E0E0 (gris claro para bordes de campos).
-5. `typography.h2.fontWeight` → 800 (Extra Bold; el doc solo fija el peso 700 del H1).
-6. `typography.nav.fontSize` → 18px y `typography.chip.fontSize` → 14px (rangos del doc: 18–20px y 13–16px).
-7. Contradicción del doc: Beautiful Freak como fuente "principal del cuerpo" vs cuerpo fijado en Google Sans Flex Regular a 20px. Se tomó Google Sans Flex como normativo.
+Valores actualizados:
+1. `colors.text-primary` → #0F0F43
+2. `colors.primary-tint` → #E8EDFB
+3. `colors.error` → #F19A3B
+4. `colors.border` → #E0E0E0
+5. Tipografía unificada: Beautiful Freak para títulos, Helvetica Neue para cuerpo y navegación.
+6. Jerarquía de pesos: 800 (eyebrows), 700 (títulos), 400 (navegación), 300 (cuerpo).
+7. Agregado: Componente Lightbox para vista amplia de proyectos.
+8. Agregado: Componente Carrusel con transición automática y flechas de navegación.
+9. Sección Mi Trabajo: 6 tarjetas (Ilustración, Identidad de marca, Gráficos en movimiento, Modelado, Campañas, Editorial).
